@@ -467,42 +467,44 @@ class _AboutState extends State<About> {
       );
 
     return Container(
-        margin: const EdgeInsets.only(top: 5),
-        height: 100,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.production_companies.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: EdgeInsets.only(left: 3.w, right: 2.w, bottom: 5.h),
-                child: Chip(
-                  //   labelPadding: EdgeInsets.all(2.0),
-                  avatar: CircleAvatar(
-                    backgroundColor: Colors.white70,
-                    child: Text(
-                        widget.production_companies[index]["name"] == null
-                            ? ""
-                            : widget.production_companies[index]["name"][0],
-                        style: const TextStyle(
-                            fontFamily: 'fonts/Lato-Bold.ttf',
-                            color: Colors.black,
-                            fontSize: 18,
-                            decoration: TextDecoration.none)),
-                  ),
-                  label: Text(
-                      widget.production_companies[index]["name"] == null
-                          ? ""
-                          : widget.production_companies[index]["name"],
-                      style: const TextStyle(
-                          // fontFamily: 'fonts/Lato-Bold.ttf',
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.none)),
-                  backgroundColor: HexColor("#7220C9"),
-                  elevation: 2.0,
-                ),
-              );
-            }));
+      margin: const EdgeInsets.only(top: 5),
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.production_companies.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: EdgeInsets.only(left: 3.w, right: 2.w, bottom: 5.h),
+            child: Chip(
+              //   labelPadding: EdgeInsets.all(2.0),
+              avatar: CircleAvatar(
+                backgroundColor: Colors.white70,
+                child: Text(
+                    widget.production_companies[index]["name"] == null
+                        ? ""
+                        : widget.production_companies[index]["name"][0],
+                    style: const TextStyle(
+                        fontFamily: 'fonts/Lato-Bold.ttf',
+                        color: Colors.black,
+                        fontSize: 18,
+                        decoration: TextDecoration.none)),
+              ),
+              label: Text(
+                  widget.production_companies[index]["name"] == null
+                      ? ""
+                      : widget.production_companies[index]["name"],
+                  style: const TextStyle(
+                      // fontFamily: 'fonts/Lato-Bold.ttf',
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none)),
+              backgroundColor: HexColor("#7220C9"),
+              elevation: 2.0,
+            ),
+          );
+        },
+      ),
+    );
   }
 }

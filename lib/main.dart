@@ -3,8 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:indiflix/Navigation/Navigation.dart';
 import 'package:indiflix/Testing/Testing.dart';
 import 'package:sizer/sizer.dart' as sizer;
+import 'package:device_preview/device_preview.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +22,9 @@ class MyApp extends StatelessWidget {
     return sizer.Sizer(builder: (BuildContext context, Orientation orientation,
         sizer.DeviceType deviceType) {
       return MaterialApp(
+         useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
         theme: ThemeData(
           fontFamily: GoogleFonts.chivo().fontFamily,
         ),
@@ -23,7 +32,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // ignore: missing_required_param
         home: MyHomePage(),
-       //home: Testing(),
+
+        ///home: Show(),
       );
     });
   }

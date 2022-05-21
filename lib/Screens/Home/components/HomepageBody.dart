@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:indiflix/Screens/Home/components/HomeCarousle.dart';
+import 'package:indiflix/Screens/MoreMoviesPage.dart/GetLists.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../ExtendedComponents/MovieListFetch.dart';
-
-
+import '../../MoreMoviesPage.dart/MoreMoviesPage.dart';
 
 class HomepageBody extends StatefulWidget {
-  const HomepageBody({ Key? key }) : super(key: key);
+  const HomepageBody({Key? key}) : super(key: key);
 
   @override
   State<HomepageBody> createState() => _HomepageBodyState();
@@ -15,7 +15,6 @@ class HomepageBody extends StatefulWidget {
 
 class _HomepageBodyState extends State<HomepageBody> {
   String s = "";
- 
 
   List data = [
     {
@@ -39,12 +38,12 @@ class _HomepageBodyState extends State<HomepageBody> {
     {
       "name": "Top Movies of 2022",
       "url":
-          "http://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&primary_release_year=2022",
+          "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&primary_release_date.gte=2020-01-01&primary_release_year=2022",
     },
     {
-      "name": "Top Movies 2020",
+      "name": "Hindi Movies",
       "url":
-          "http://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&primary_release_year=2020",
+          "https://api.themoviedb.org/3/movie/popular?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_original_language=hi",
     },
     {
       "name": "Action Movies",
@@ -86,45 +85,34 @@ class _HomepageBodyState extends State<HomepageBody> {
       "url":
           "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=9648",
     },
-    {
-      "name": "",
-      "url":
-          "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=80"
-    },
+    
+
   ];
   @override
   Widget build(BuildContext context) {
     return Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.black,
-            ),
-            child: getlist());
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.black,
+        ),
+        child: getlist());
   }
 
-
-   Widget getlist() {
+  Widget getlist() {
     return ListView.builder(
-      
         addAutomaticKeepAlives: true,
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) return gethead();
           if (index == 1) return HomeCarousle();
-          if (index == 3)
-            return Container();
-          if (index == 14) {
-            if (s == "") return Container();
-            return getlatest("Cuz you searched for " + s,
-                "https://enage22.herokuapp.com/send/" + s, s);
-          }
+          if (index == 3) return Container();
+          
 
           return getlatest(data[index]["name"], data[index]['url'], "");
         });
   }
 
-  
   Widget gethead() {
     return Container(
         margin: const EdgeInsets.only(left: 5, right: 5, bottom: 10),
@@ -133,60 +121,55 @@ class _HomepageBodyState extends State<HomepageBody> {
           children: [
             Row(children: [
               const SizedBox(
-              height: 43,
-              width: 43,
-              child: Image(
-                color: Colors.pink,
-                fit: BoxFit.cover,
-                image: AssetImage("images/logo3.png"),
-              )),
+                  height: 43,
+                  width: 43,
+                  child: Image(
+                    color: Colors.pink,
+                    fit: BoxFit.cover,
+                    image: AssetImage("images/logo3.png"),
+                  )),
               Shimmer.fromColors(
-              period: Duration(milliseconds: 2000),
-              baseColor: (Colors.grey[100])!,
-              direction: ShimmerDirection.ltr,
-              highlightColor: (Colors.grey[800])!,
-              child: Container(
-                  margin: EdgeInsets.only(top: 3),
-                  child: const Text("Dart Flix",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold)))),
+                  period: Duration(milliseconds: 2000),
+                  baseColor: (Colors.grey[100])!,
+                  direction: ShimmerDirection.ltr,
+                  highlightColor: (Colors.grey[800])!,
+                  child: Container(
+                      margin: EdgeInsets.only(top: 3),
+                      child: const Text("Dart Flix",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 19,
+                              fontWeight: FontWeight.bold)))),
             ]),
             InkWell(
                 highlightColor: Colors.grey,
                 hoverColor: Colors.white,
-                onTap: () {
-                  
-                },
+                onTap: () {},
                 child: const Icon(
                   Icons.search,
                   color: Colors.white,
                   size: 28.0,
                 )),
           ],
-        ));}
+        ));
+  }
 
-
-
-
-   Widget getlatest(name, url, recentname) {
+  Widget getlatest(name, url, recentname) {
     return Container(
         child: Column(
       children: [
-        getlatesthead(name, url),
-       Latest(
+        TopShimmer(name, url),
+        Latest(
           url: url,
-         // id: widget.id,
-         // username: widget.username,
+          // id: widget.id,
+          // username: widget.username,
           recentname: recentname,
         ),
       ],
     ));
   }
 
-
-  Widget getlatesthead(name, url) {
+  Widget TopShimmer(name, url) {
     return Container(
         margin: EdgeInsets.only(top: 15, right: 10),
         child: Row(
@@ -207,7 +190,7 @@ class _HomepageBodyState extends State<HomepageBody> {
                     highlightColor: (Colors.grey[800])!,
                     child: Container(
                         width: 250,
-                        child: Text(name.toUpperCase(),
+                        child: Text(name,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -220,14 +203,25 @@ class _HomepageBodyState extends State<HomepageBody> {
                     child: InkWell(
                     highlightColor: Colors.grey,
                     hoverColor: Colors.white,
-                    onTap: () {
-                      
-                    },
-                    child: Text("MORE",
-                        style: TextStyle(
-                            color: Colors.white,
-                            //fontWeight: FontWeight.bold,
-                            fontSize: 15)),
+                    onTap: () {},
+                    child: InkWell(
+                      highlightColor: Colors.grey,
+                      hoverColor: Colors.white,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => MoreMoviesPage(
+                                      url: url,
+                                      originalmoviename: name,
+                                    ))));
+                      },
+                      child: Text("See More",
+                          style: TextStyle(
+                              color: Colors.white,
+                              //fontWeight: FontWeight.bold,
+                              fontSize: 15)),
+                    ),
                   ))
           ],
         ));

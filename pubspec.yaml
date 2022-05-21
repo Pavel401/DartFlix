@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  auto_size_text: ^3.0.0
   awesome_package: null
   cached_network_image: ^3.2.0
   carousel_slider: ^4.1.1
@@ -44,6 +45,7 @@ dependencies:
   shared_preferences: ^2.0.5
   shimmer: ^2.0.0
   sizer: ^2.0.15
+  text_scroll: ^0.0.4
   url_launcher: ^6.0.4
 
 dev_dependencies:
