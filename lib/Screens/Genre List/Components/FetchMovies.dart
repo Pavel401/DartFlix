@@ -7,16 +7,20 @@ import 'package:indiflix/Screens/MoreMoviesPage.dart/Widgets/MovieCard.dart';
 import 'package:shimmer/shimmer.dart';
 //import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class MoreMovies extends StatefulWidget {
-  final url;
-
-  MoreMovies({Key? key, @required this.url}) : super(key: key);
+class fetchGenreData extends StatefulWidget {
+  final genre;
+  final page;
+  final id;
+  fetchGenreData({Key? key, this.genre, required this.page, required this.id})
+      : super(key: key);
 
   @override
-  _MoreMoviesState createState() => _MoreMoviesState();
+  _fetchGenreDataState createState() => _fetchGenreDataState();
 }
 
-class _MoreMoviesState extends State<MoreMovies> {
+class _fetchGenreDataState extends State<fetchGenreData> {
+  String url =
+      "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=";
   List popularlist = [];
 //HashMap of genres data
   Map<String, int> genres_ids = {
@@ -42,7 +46,9 @@ class _MoreMoviesState extends State<MoreMovies> {
   };
   List genres = [];
   void getpopularresponse() async {
-    var response = await Dio().get(widget.url);
+    var response = await Dio().get(
+      url + this.widget.id.toString() + "&page=" + this.widget.page.toString(),
+    );
 
     var data = response.data;
     try {
@@ -85,8 +91,9 @@ class _MoreMoviesState extends State<MoreMovies> {
                 height: 170,
                 margin: EdgeInsets.all(6.0),
                 decoration: BoxDecoration(
-                    color: (Colors.purple[200])!,
-                    borderRadius: BorderRadius.circular(4.0)),
+                  color: (Colors.purple[200])!,
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
               ),
             );
           },
