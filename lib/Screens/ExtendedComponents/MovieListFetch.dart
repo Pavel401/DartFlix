@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/DetailsPage/Components/DetailsPageBody.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -217,14 +218,14 @@ class _LatestState extends State<Latest> {
               itemBuilder: (BuildContext context, int index) {
                 return Shimmer.fromColors(
                   period: const Duration(milliseconds: 2000),
-                  baseColor: (Colors.grey[700])!,
+                  baseColor: HexColor("#8970A4"),
                   direction: ShimmerDirection.ltr,
-                  highlightColor: (Colors.grey[500])!,
+                  highlightColor: HexColor("#463567"),
                   child: Container(
                     width: 118,
                     margin: const EdgeInsets.all(6.0),
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: (Colors.purple[200])!,
                         borderRadius: BorderRadius.circular(4.0)),
                   ),
                 );
@@ -258,7 +259,7 @@ class _LatestState extends State<Latest> {
                             Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
-                               //   color: Colors.white,
+                                  //   color: Colors.white,
                                 ),
                                 height: 200,
                                 width: 120,

@@ -38,6 +38,7 @@ dependencies:
     sdk: flutter
   flutter_icons: ^1.1.0
   flutter_launcher_icons: ^0.9.0
+  flutter_shimmer: ^2.1.2
   flutter_tindercard: ^0.2.0
   google_fonts: ^2.3.2
   hexcolor: ^2.0.7

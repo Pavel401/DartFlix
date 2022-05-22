@@ -265,14 +265,14 @@ class _RecommendationsState extends State<Recommendations> {
               itemBuilder: (BuildContext context, int index) {
                 return Shimmer.fromColors(
                   period: const Duration(milliseconds: 2000),
-                  baseColor: (Colors.grey[700])!,
-                  direction: ShimmerDirection.ltr,
-                  highlightColor: (Colors.grey[500])!,
+                 baseColor:  HexColor("#8970A4"),
+          direction: ShimmerDirection.ltr,
+          highlightColor:HexColor("#463567") ,
                   child: Container(
                     height: 160,
                     margin: const EdgeInsets.all(6.0),
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: (Colors.purple[200])!,
                         borderRadius: BorderRadius.circular(4.0)),
                   ),
                 );

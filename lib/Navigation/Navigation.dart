@@ -50,12 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
       Profile(),
     ];
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       body: routes[_currentPageIndex],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
+        backgroundColor: HexColor("#272727"),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey[600],
         currentIndex: _currentPageIndex,
