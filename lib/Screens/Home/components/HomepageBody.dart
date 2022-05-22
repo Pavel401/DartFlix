@@ -4,8 +4,8 @@ import 'package:indiflix/Screens/Home/components/HomeCarousle.dart';
 import 'package:indiflix/Screens/MoreMoviesPage.dart/GetLists.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../ExtendedComponents/MovieListFetch.dart';
 import '../../MoreMoviesPage.dart/MoreMoviesPage.dart';
+import '../ExtendedComponents/FetchHorizontalMovieList.dart';
 
 class HomepageBody extends StatefulWidget {
   const HomepageBody({Key? key}) : super(key: key);
@@ -157,7 +157,7 @@ class _HomepageBodyState extends State<HomepageBody> {
         child: Column(
       children: [
         TopShimmer(name, url),
-        Latest(
+        FetchHorizontalMovieList(
           url: url,
           // id: widget.id,
           // username: widget.username,

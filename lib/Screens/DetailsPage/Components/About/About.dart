@@ -272,7 +272,7 @@ class _AboutState extends State<About> {
                   child: Text(
                       (moviedetails[0]['runtime'].toString().isEmpty
                           ? "NO data"
-                          : moviedetails[0]['runtime'].toString() + "minutes"),
+                          : moviedetails[0]['runtime'].toString() + " minutes"),
                       style: TextStyle(
                         wordSpacing: 0.8.w,
                         //fontFamily: 'fonts/Lato-Bold.ttf',

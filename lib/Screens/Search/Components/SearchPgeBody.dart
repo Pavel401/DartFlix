@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:indiflix/Screens/Genre%20List/GenreWiseMovies.dart';
+
+import 'Searchqueryshow.dart';
 
 class SearchPageBody extends StatefulWidget {
   const SearchPageBody({Key? key}) : super(key: key);
@@ -123,7 +126,14 @@ class _SearchPageBodyState extends State<SearchPageBody> {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: TextField(
-        onTap: () {},
+        onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Searchnames(
+                         
+                        )));
+        },
         decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Search',
@@ -139,9 +149,9 @@ class _SearchPageBodyState extends State<SearchPageBody> {
     if (val.isEmpty)
       return Container(
         child: ListView.builder(
-                  addAutomaticKeepAlives: true,
-shrinkWrap: true,
-          itemCount: 4,
+            addAutomaticKeepAlives: true,
+            shrinkWrap: true,
+            itemCount: 4,
             itemBuilder: ((context, index) => VideoShimmer(
                   isPurplishMode: true,
                   isDarkMode: true,
@@ -159,7 +169,15 @@ shrinkWrap: true,
               controller: ScrollController(keepScrollOffset: false),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              GenreWiseMovies(genre: val[index]["name"],id:val[index]["id"] ,),
+                        ),
+                      );
+                    },
                     child: Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.all(3.0),

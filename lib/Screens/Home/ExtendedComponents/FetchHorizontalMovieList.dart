@@ -4,24 +4,25 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/DetailsPage/Components/DetailsPageBody.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Latest extends StatefulWidget {
+class FetchHorizontalMovieList extends StatefulWidget {
   final url;
   final id;
   final username;
   final recentname;
-  const Latest(
+  const FetchHorizontalMovieList(
       {Key? key, @required this.url, this.id, this.username, this.recentname})
       : super(key: key);
 
   @override
-  _LatestState createState() => _LatestState();
+  _FetchHorizontalMovieListState createState() =>
+      _FetchHorizontalMovieListState();
 }
 
-class _LatestState extends State<Latest> {
+class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
   List val = [];
   List watchlist = [];
   bool add = false;
-  Future getpostdata() async {
+  Future fetchMovieData() async {
     if (widget.id == null) return;
     final String url = "https://enage22.herokuapp.com/watch/" + widget.id;
     try {
@@ -58,7 +59,7 @@ class _LatestState extends State<Latest> {
   void initState() {
     super.initState();
     this.getresponse();
-    this.getpostdata().then((value) => {
+    this.fetchMovieData().then((value) => {
           if (mounted)
             {
               if (value == null || value.length == 0)
@@ -232,69 +233,72 @@ class _LatestState extends State<Latest> {
               }));
     } else {
       return Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0),
-          height: 168.0,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: val.length != null ? val.length : 0,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsPageBody(
-                            moviename: val[index]["original_title"],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                        width: 118,
-                        margin: EdgeInsets.all(6.0),
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: val.length != null ? val.length : 0,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsPageBody(
+                      moviename: val[index]["original_title"],
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                width: 118,
+                margin: EdgeInsets.all(6.0),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(4.0)),
+                child: Stack(
+                  children: [
+                    Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4.0)),
-                        child: Stack(
-                          children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  //   color: Colors.white,
-                                ),
-                                height: 200,
-                                width: 120,
-                                child: val[index]["poster_path"] == null
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: const Image(
-                                          image:
-                                              AssetImage("images/loading.png"),
-                                          fit: BoxFit.cover,
-                                        ))
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: FadeInImage.assetNetwork(
-                                          image:
-                                              "https://image.tmdb.org/t/p/w500" +
-                                                  val[index]["poster_path"],
-                                          placeholder: "images/loading.png",
-                                          fit: BoxFit.cover,
-                                        ))),
-                            Positioned(
-                              bottom: 3,
-                              right: 0,
-                              child: GestureDetector(
-                                  onTap: () {
-                                    //add the ontap method after clicking the three dot menu
-                                  },
-                                  child: const Icon(
-                                    Icons.more_vert,
-                                    color: Colors.white,
-                                  )),
-                            )
-                          ],
-                        )));
-              }));
+                          borderRadius: BorderRadius.circular(5),
+                          //   color: Colors.white,
+                        ),
+                        height: 200,
+                        width: 120,
+                        child: val[index]["poster_path"] == null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: const Image(
+                                  image: AssetImage("images/loading.png"),
+                                  fit: BoxFit.cover,
+                                ))
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: FadeInImage.assetNetwork(
+                                  image: "https://image.tmdb.org/t/p/w500" +
+                                      val[index]["poster_path"],
+                                  placeholder: "images/loading.png",
+                                  fit: BoxFit.cover,
+                                ))),
+                    Positioned(
+                      bottom: 3,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          //add the ontap method after clicking the three dot menu
+                        },
+                        child: const Icon(
+                          Icons.more_vert,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
     }
   }
 }
