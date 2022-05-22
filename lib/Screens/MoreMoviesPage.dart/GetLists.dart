@@ -71,13 +71,10 @@ class _MoreMoviesState extends State<MoreMovies> {
       return Container(
           margin: EdgeInsets.all(8.0),
           child: ListView.builder(
-            physics: ScrollPhysics(),
+              physics: ScrollPhysics(),
               shrinkWrap: true,
               itemCount: 18,
-            
-            
-            itemBuilder: (BuildContext context, int index){
-
+              itemBuilder: (BuildContext context, int index) {
                 return Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),
                   baseColor: (Colors.grey[700])!,
@@ -91,9 +88,7 @@ class _MoreMoviesState extends State<MoreMovies> {
                         borderRadius: BorderRadius.circular(4.0)),
                   ),
                 );
-
-
-          }));
+              }));
     else
       return Container(
           margin: EdgeInsets.all(8.0),
@@ -154,4 +149,3 @@ class _MoreMoviesState extends State<MoreMovies> {
     return pass_genres;
   }
 }
-

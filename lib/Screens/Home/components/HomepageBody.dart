@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/Home/components/HomeCarousle.dart';
 import 'package:indiflix/Screens/MoreMoviesPage.dart/GetLists.dart';
 import 'package:shimmer/shimmer.dart';
@@ -85,8 +86,6 @@ class _HomepageBodyState extends State<HomepageBody> {
       "url":
           "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=9648",
     },
-    
-
   ];
   @override
   Widget build(BuildContext context) {
@@ -107,7 +106,6 @@ class _HomepageBodyState extends State<HomepageBody> {
           if (index == 0) return gethead();
           if (index == 1) return HomeCarousle();
           if (index == 3) return Container();
-          
 
           return getlatest(data[index]["name"], data[index]['url'], "");
         });
@@ -181,7 +179,7 @@ class _HomepageBodyState extends State<HomepageBody> {
                   height: 25,
                   width: 5,
                   margin: EdgeInsets.only(right: 8, left: 2),
-                  decoration: BoxDecoration(color: Colors.blue[300]),
+                  decoration: BoxDecoration(color: HexColor("#7220C9")),
                 ),
                 Shimmer.fromColors(
                     period: Duration(milliseconds: 2000),

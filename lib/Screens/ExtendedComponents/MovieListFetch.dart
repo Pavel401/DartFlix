@@ -192,7 +192,6 @@ class _LatestState extends State<Latest> {
                     GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          
                         },
                         child: Container(
                             child: Text(
@@ -208,7 +207,7 @@ class _LatestState extends State<Latest> {
 
   @override
   Widget build(BuildContext context) {
-    if (val == null) {
+    if (val.isEmpty) {
       return Container(
           margin: EdgeInsets.symmetric(vertical: 10.0),
           height: 168.0,
@@ -240,13 +239,14 @@ class _LatestState extends State<Latest> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                     onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailsPageBody(
-                                    moviename: val[index]["original_title"],
-                                   
-                                  )));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsPageBody(
+                            moviename: val[index]["original_title"],
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                         width: 118,
@@ -258,8 +258,9 @@ class _LatestState extends State<Latest> {
                             Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
+                               //   color: Colors.white,
                                 ),
-                                height: 165,
+                                height: 200,
                                 width: 120,
                                 child: val[index]["poster_path"] == null
                                     ? ClipRRect(
@@ -279,37 +280,11 @@ class _LatestState extends State<Latest> {
                                           fit: BoxFit.cover,
                                         ))),
                             Positioned(
-                              top: 3,
+                              bottom: 3,
                               right: 0,
                               child: GestureDetector(
                                   onTap: () {
-                                    if (widget.id == null) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Container(
-                                            height: 25,
-                                            alignment: Alignment.center,
-                                            child: const Text("PLEASE LOGIN",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                          action: SnackBarAction(
-                                            label: 'CANCEL',
-                                            onPressed: () {
-                                              // Code to execute.
-                                            },
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      _showMyDialog(
-                                          val[index]["id"],
-                                          val[index]["original_title"],
-                                          val[index]["poster_path"]);
-                                    }
+                                    //add the ontap method after clicking the three dot menu
                                   },
                                   child: const Icon(
                                     Icons.more_vert,

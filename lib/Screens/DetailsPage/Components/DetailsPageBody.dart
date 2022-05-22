@@ -62,9 +62,11 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
           "http://movie-bj-9.herokuapp.com/getmovie/" +
               widget.moviename.toString());
       var data = response.data;
-      setState(() {
-        moviedetails = data;
-      });
+      if (mounted) {//if the widget is mounted in the tree then only set the state
+        setState(() {
+          moviedetails = data;
+        });
+      }
     } catch (e) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const ErrorPage()));
@@ -80,6 +82,12 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const ErrorPage()));
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
