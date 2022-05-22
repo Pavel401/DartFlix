@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/DetailsPage/Components/DetailsPageBody.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -43,13 +44,13 @@ class _HomeCarousleState extends State<HomeCarousle> {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Shimmer.fromColors(
           period: const Duration(milliseconds: 2000),
-          baseColor: (Colors.grey[500])!,
+          baseColor:  HexColor("#8970A4"),
           direction: ShimmerDirection.ltr,
-          highlightColor: (Colors.grey[300])!,
+          highlightColor:HexColor("#463567") ,
           child: Container(
             margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+                color:(Colors.purple[200])!, borderRadius: BorderRadius.circular(8)),
           ),
         ),
       );
