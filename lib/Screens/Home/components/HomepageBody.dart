@@ -5,6 +5,7 @@ import 'package:indiflix/Screens/MoreMoviesPage.dart/GetLists.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../MoreMoviesPage.dart/MoreMoviesPage.dart';
+import '../../Search/Components/Searchqueryshow.dart';
 import '../ExtendedComponents/FetchHorizontalMovieList.dart';
 
 class HomepageBody extends StatefulWidget {
@@ -142,7 +143,10 @@ class _HomepageBodyState extends State<HomepageBody> {
             InkWell(
                 highlightColor: Colors.grey,
                 hoverColor: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SearchQuery()));
+                },
                 child: const Icon(
                   Icons.search,
                   color: Colors.white,

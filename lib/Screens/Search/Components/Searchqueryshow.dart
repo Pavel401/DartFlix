@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 import '../../DetailsPage/Components/DetailsPageBody.dart';
 
-class Searchnames extends StatefulWidget {
+class SearchQuery extends StatefulWidget {
   final userid;
-  Searchnames({Key? key, @required this.userid}) : super(key: key);
+  SearchQuery({Key? key, @required this.userid}) : super(key: key);
 
   @override
-  _SearchnamesState createState() => _SearchnamesState();
+  _SearchQueryState createState() => _SearchQueryState();
 }
 
-class _SearchnamesState extends State<Searchnames> {
+class _SearchQueryState extends State<SearchQuery> {
   List search_result = [];
   String query = "";
 
@@ -75,6 +77,7 @@ class _SearchnamesState extends State<Searchnames> {
             alignment: Alignment.center,
             color: HexColor("#272727"),
             child: TextField(
+              cursorColor: Colors.white,
               onChanged: (text) {
                 setState(() {
                   query = text;
@@ -95,16 +98,21 @@ class _SearchnamesState extends State<Searchnames> {
                   } catch (e) {}
                 });
               },
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 15),
               decoration: InputDecoration(
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: HexColor("#7220C9"),
+                  ),
+                  // suffixIconColor: HexColor("#7220C9"),
                   filled: true,
-                  fillColor: Colors.black,
+                  fillColor: HexColor("#272727"),
                   border: InputBorder.none,
                   focusColor: Colors.white,
                   hoverColor: Colors.white,
                   labelStyle: TextStyle(color: Colors.white),
                   hintStyle: TextStyle(color: Colors.white),
-                  hintText: 'Search'),
+                  hintText: 'Search for a movie or genre'),
             ),
           ),
           leading: InkWell(
@@ -124,14 +132,20 @@ class _SearchnamesState extends State<Searchnames> {
   Widget getname() {
     if (query.isEmpty || query == "")
       return Center(
-          child: Container(
-              child: Text(
-        "🎥   🍟    😋",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Grab a popcorn and start watching 🎥🍟😋",
+              maxLines: 2,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+              ),
+            ),
+          ],
         ),
-      )));
+      );
     if (search_result.isEmpty)
       return Center(child: CircularProgressIndicator());
 
@@ -150,7 +164,7 @@ class _SearchnamesState extends State<Searchnames> {
                   ),
                 ),
               );
-              print("clicked");
+              // print("clicked");
             },
             child: Container(
               margin: EdgeInsets.all(2),
@@ -160,43 +174,61 @@ class _SearchnamesState extends State<Searchnames> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          height: 130,
-                          width: 100,
-                          child: search_result[index]["poster_path"] == null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(4),
-                                  child: Image(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage('images/loading.png')))
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(4),
-                                  child: FadeInImage.assetNetwork(
-                                    image: "https://image.tmdb.org/t/p/w500" +
-                                        search_result[index]["poster_path"],
-                                    placeholder: "images/loading.png",
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        height: 130,
+                        width: 100,
+                        child: search_result[index]["poster_path"] == null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: Image(
                                     fit: BoxFit.cover,
-                                  ))),
+                                    image: AssetImage('images/loading.png')))
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: FadeInImage.assetNetwork(
+                                  image: "https://image.tmdb.org/t/p/w500" +
+                                      search_result[index]["poster_path"],
+                                  placeholder: "images/loading.png",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                              width: MediaQuery.of(context).size.width * 0.54,
-                              margin: EdgeInsets.only(top: 20, left: 5),
-                              child: Text(
-                                search_result[index]['original_title'],
-                                maxLines: 1,
-                                softWrap: false,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 18),
-                              )),
+                          SizedBox(
+                            width: 50.w,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextScroll(
+                                    search_result[index]['original_title']
+                                            .toString()
+                                            .isEmpty
+                                        ? "Unknown"
+                                        : search_result[index]
+                                            ['original_title'],
+                                    velocity: Velocity(
+                                        pixelsPerSecond: Offset(20, 0)),
+                                    pauseBetween: Duration(milliseconds: 1000),
+                                    mode: TextScrollMode.bouncing,
+                                    style: TextStyle(
+                                        color: HexColor("#DEDEDE"),
+                                        fontSize: 20),
+                                    textAlign: TextAlign.right,
+                                    selectable: false,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           Container(
                             margin: EdgeInsets.only(top: 20, left: 10),
                             child: Text(

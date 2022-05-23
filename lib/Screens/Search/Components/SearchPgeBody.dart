@@ -130,7 +130,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Searchnames(
+                    builder: (context) => SearchQuery(
                          
                         )));
         },
