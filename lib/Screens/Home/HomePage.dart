@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:indiflix/Screens/Home/components/CollaborativeHomepage.dart';
 import 'package:indiflix/Screens/Home/components/HomepageBody.dart';
 
 class Home extends StatefulWidget {
@@ -15,7 +16,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: HexColor("#121212"),
       resizeToAvoidBottomInset: false,
-      body: HomepageBody(),
+      //body: HomepageBody(),
+            body: CollaborativeHomePage(),
+
     );
   }
 }

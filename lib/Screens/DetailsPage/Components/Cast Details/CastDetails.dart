@@ -80,10 +80,11 @@ class _CastdetailsState extends State<Castdetails> {
                               ))
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: CachedNetworkImage(
-                                imageUrl: "https://image.tmdb.org/t/p/w500" +
+                              child: FadeInImage.assetNetwork(
+                                image: "https://image.tmdb.org/t/p/w500" +
                                     widget.profilepath,
                                 fit: BoxFit.cover,
+                                placeholder: "images/loading.png",
                               )),
                     ),
                     Expanded(

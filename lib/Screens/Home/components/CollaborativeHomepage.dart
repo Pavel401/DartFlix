@@ -3,6 +3,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../Onboarding Page/Genere selection/Components/GenreChips.dart';
+import '../../../main.dart';
 import '../../MoreMoviesPage.dart/MoreMoviesPage.dart';
 import '../../Search/Components/Searchqueryshow.dart';
 import '../ExtendedComponents/FetchHorizontalMovieList.dart';
@@ -16,6 +18,42 @@ class CollaborativeHomePage extends StatefulWidget {
 }
 
 class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
+  String primary_url =
+      "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   print("Persistent Genre"+persistedGenres.toList().toString());
+       print(FilterChipDisplay.filters.toList());
+       
+
+
+
+    // int count=FilterChipDisplay
+  }
+
+  Map<String, int> genres_ids = {
+    'Adventure': 12,
+    'Fantasy': 14,
+    'Animation': 16,
+    'Drama': 18,
+    'Horror': 27,
+    'Action': 28,
+    'Comedy': 35,
+    'History': 36,
+    'Western': 37,
+    'Thriller': 53,
+    'Crime': 80,
+    'Documentary': 99,
+    'Science Fiction': 878,
+    'Mystery': 9648,
+    'Music': 10402,
+    'Romance': 10749,
+    'Family': 10751,
+    'War': 10752,
+    'TV Movie': 10770,
+  };
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -34,17 +72,49 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
               "Top Movies of 2022",
               "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&primary_release_date.gte=2020-01-01&primary_release_year=2022",
               ""),
-
-              SizedBox(
-                height: 4.h,
-              ),
+          SizedBox(
+            height: 4.h,
+          ),
           getlatest(
               "Top Rated",
               "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
               ""),
+          persistedGenres.isNotEmpty
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: persistedGenres.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return getlatest(
+                     persistedGenres[index].toString(),
+                        primary_url +
+                            check(persistedGenres[index]).toString(),
+                        "");
+                  })
+              : Container(),
         ],
       ),
     );
+  }
+
+  String check(String m) {
+    bool stop = false; //bool for checking
+    String val = "";
+    int n = 0;
+
+    //for appending the data
+    for (int i = 0; i < genres_ids.length; i++) {
+      if (stop) {
+        break;
+      }
+      if (genres_ids.keys.elementAt(i) == m) {
+        val = genres_ids.values.elementAt(i).toString();
+        stop = true;
+      }
+    }
+
+    return val;
   }
 
   Widget getlatest(name, url, recentname) {

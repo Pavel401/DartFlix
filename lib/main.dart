@@ -3,13 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:indiflix/Navigation/Navigation.dart';
 import 'package:indiflix/Onboarding%20Page/Genere%20selection/GenreSelection.dart';
 import 'package:indiflix/Testing/Testing.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart' as sizer;
 import 'package:device_preview/device_preview.dart';
 
 import 'Onboarding Page/Language Selection/LanguageSelection.dart';
 import 'Splash/SplashScreen.dart';
+ late  SharedPreferences preferences;
+  List persistedGenres = [];
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
   runApp(
     DevicePreview(
       builder: (context) => MyApp(), // Wrap your app
@@ -17,8 +21,28 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+   
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init();
+
+  }
+
+   static Future init() async {
+    preferences = await SharedPreferences.getInstance();
+    persistedGenres = preferences.getStringList('_keygenres') ?? [];
+  }
 
   // This widget is the root of your application.
   @override
@@ -27,12 +51,12 @@ class MyApp extends StatelessWidget {
         sizer.DeviceType deviceType) {
       return MaterialApp(
         routes: {
-        '/GenreSelection': (context) => GenreSelection(),
-        '/LanguageSelection': (context) => BuildLanguageSelection(),
-      },
-         useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+          '/GenreSelection': (context) => GenreSelection(),
+          '/LanguageSelection': (context) => BuildLanguageSelection(),
+        },
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         theme: ThemeData(
           fontFamily: GoogleFonts.chivo().fontFamily,
         ),

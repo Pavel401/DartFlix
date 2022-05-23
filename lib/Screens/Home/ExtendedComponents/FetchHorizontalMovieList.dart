@@ -39,9 +39,11 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
     try {
       if (widget.recentname != "") {
         if (mounted) {
-          setState(() {
-            val = data;
-          });
+          setState(
+            () {
+              val = data;
+            },
+          );
         }
       } else {
         if (mounted) {

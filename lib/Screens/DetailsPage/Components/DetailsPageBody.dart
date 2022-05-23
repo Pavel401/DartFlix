@@ -169,13 +169,13 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                         0, 30, rect.width, rect.height));
                                   },
                                   blendMode: BlendMode.dstIn,
-                                  child: CachedNetworkImage(
-                                    imageUrl:
+                                  child: FadeInImage.assetNetwork(
+                                    image:  
                                         "https://image.tmdb.org/t/p/original" +
                                             moviedetails[0]['backdrop_path'],
                                     height: 230,
                                     fit: BoxFit.cover,
-                                    width: double.infinity,
+                                    width: double.infinity, placeholder: 'images/loading.png',
                                   ),
                                 ),
                           Container(

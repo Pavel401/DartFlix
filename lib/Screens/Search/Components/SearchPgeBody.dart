@@ -127,12 +127,8 @@ class _SearchPageBodyState extends State<SearchPageBody> {
       ),
       child: TextField(
         onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SearchQuery(
-                         
-                        )));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchQuery()));
         },
         decoration: InputDecoration(
             border: InputBorder.none,
@@ -173,8 +169,10 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              GenreWiseMovies(genre: val[index]["name"],id:val[index]["id"] ,),
+                          builder: (context) => GenreWiseMovies(
+                            genre: val[index]["name"],
+                            id: val[index]["id"],
+                          ),
                         ),
                       );
                     },

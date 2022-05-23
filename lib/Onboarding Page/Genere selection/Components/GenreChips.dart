@@ -3,6 +3,7 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Onboarding%20Page/Language%20Selection/components/LanguageChips.dart';
+import 'package:indiflix/main.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -11,7 +12,7 @@ import '../../../Util/RoundedRectenguarButton.dart';
 import '../../Language Selection/LanguageSelection.dart';
 
 class FilterChipDisplay extends StatefulWidget {
-  static final List<String> _filters = [];
+  static List<String> filters = [];
 
   @override
   _FilterChipDisplayState createState() => _FilterChipDisplayState();
@@ -69,11 +70,11 @@ class _FilterChipDisplayState extends State<FilterChipDisplay> {
         ),
         RoundedRectengularButton(
           text: "Continue",
-          onPressed: () {
+          onPressed: () async {
             var _type = FeedbackType.success;
             Vibrate.feedback(_type);
 
-            if (FilterChipDisplay._filters.isEmpty) {
+            if (FilterChipDisplay.filters.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -86,6 +87,9 @@ class _FilterChipDisplayState extends State<FilterChipDisplay> {
                 ),
               );
             } else {
+              // print(FilterChipDisplay.filters.toList());
+              preferences.setStringList(
+                  "_keygenres", FilterChipDisplay.filters.toList());
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) {
@@ -143,12 +147,12 @@ class _filterChipWidgetState extends State<filterChipWidget> {
         setState(() {
           if (isSelected) {
             _isSelected = isSelected;
-            FilterChipDisplay._filters.add(widget.chipName);
+            FilterChipDisplay.filters.add(widget.chipName);
             // print( FilterChipDisplay._filters.toString());
           } else {
             _isSelected = false;
 
-            FilterChipDisplay._filters.removeWhere((String name) {
+            FilterChipDisplay.filters.removeWhere((String name) {
               return name == widget.chipName;
             });
           }
