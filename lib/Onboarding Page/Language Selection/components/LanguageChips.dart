@@ -9,9 +9,10 @@ import 'package:sizer/sizer.dart';
 
 import '../../../Snackbar/Snackbar.dart';
 import '../../../Util/RoundedRectenguarButton.dart';
+import '../../../main.dart';
 
 class LanguageSelection extends StatefulWidget {
-  static final List<String> _languages = [];
+  static final List<String> languages = [];
 
   @override
   _LanguageSelectionState createState() => _LanguageSelectionState();
@@ -20,27 +21,7 @@ class LanguageSelection extends StatefulWidget {
 class _LanguageSelectionState extends State<LanguageSelection> {
   @override
   Widget build(BuildContext context) {
-    Map<String, int> genres_ids = {
-      'Adventure': 12,
-      'Fantasy': 14,
-      'Animation': 16,
-      'Drama': 18,
-      'Horror': 27,
-      'Action': 28,
-      'Comedy': 35,
-      'History': 36,
-      'Western': 37,
-      'Thriller': 53,
-      'Crime': 80,
-      'Documentary': 99,
-      'Science Fiction': 878,
-      'Mystery': 9648,
-      'Music': 10402,
-      'Romance': 10749,
-      'Family': 10751,
-      'War': 10752,
-      'TV Movie': 10770,
-    };
+  
     // TODO: implement build
     return Column(
       children: <Widget>[
@@ -57,10 +38,10 @@ class _LanguageSelectionState extends State<LanguageSelection> {
               LanguageChip(chipName: 'Telugu'),
               LanguageChip(chipName: 'Tamil'),
               LanguageChip(chipName: 'Kannada'),
-              LanguageChip(chipName: 'Malayalam'),
               LanguageChip(chipName: 'Marathi'),
               LanguageChip(chipName: 'Gujarati'),
               LanguageChip(chipName: 'Punjabi'),
+              LanguageChip(chipName: 'Oriya'),
             ],
           )),
         ),
@@ -72,7 +53,7 @@ class _LanguageSelectionState extends State<LanguageSelection> {
           onPressed: () async {
             var _type = FeedbackType.success;
             Vibrate.feedback(_type);
-            if (LanguageSelection._languages.isEmpty) {
+            if (LanguageSelection.languages.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -86,7 +67,8 @@ class _LanguageSelectionState extends State<LanguageSelection> {
               );
             } else {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-
+              preferences.setStringList(
+                  "_language", LanguageSelection.languages.toList());
               await prefs.setBool('seen', true);
               Navigator.pushAndRemoveUntil(
                 context,
@@ -142,12 +124,12 @@ class _LanguageChipState extends State<LanguageChip> {
         setState(() {
           if (isSelected) {
             _isSelected = isSelected;
-            LanguageSelection._languages.add(widget.chipName);
+            LanguageSelection.languages.add(widget.chipName);
             // print( FilterChipDisplay._filters.toString());
           } else {
             _isSelected = false;
 
-            LanguageSelection._languages.removeWhere((String name) {
+            LanguageSelection.languages.removeWhere((String name) {
               return name == widget.chipName;
             });
           }

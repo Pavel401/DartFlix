@@ -20,15 +20,15 @@ class CollaborativeHomePage extends StatefulWidget {
 class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
   String primary_url =
       "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=";
+  String secondary_url =
+      "https://api.themoviedb.org/3/movie/popular?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_original_language=";
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   print("Persistent Genre"+persistedGenres.toList().toString());
-       print(FilterChipDisplay.filters.toList());
-       
-
-
+    print("Persistent Genre" + persistedGenres.toList().toString());
+    print(FilterChipDisplay.filters.toList());
+    print("Persistent languge" + persistedLanguages.toList().toString());
 
     // int count=FilterChipDisplay
   }
@@ -53,6 +53,18 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
     'Family': 10751,
     'War': 10752,
     'TV Movie': 10770,
+  };
+  Map<String, String> language_codes = {
+    'English': "en",
+    'Hindi': "hi",
+    'Bengali': "bn",
+    'Telugu': "te",
+    'Tamil': "ta",
+    'Kannada': "kn",
+    'Marathi': "mr",
+    'Gujarati': "gu",
+    'Punjabi': "pa",
+    'Oriya': "or",
   };
   @override
   Widget build(BuildContext context) {
@@ -87,22 +99,53 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
                   itemCount: persistedGenres.length,
                   itemBuilder: (BuildContext context, int index) {
                     return getlatest(
-                     persistedGenres[index].toString(),
-                        primary_url +
-                            check(persistedGenres[index]).toString(),
+                        persistedGenres[index].toString(),
+                        primary_url + check(persistedGenres[index]).toString(),
                         "");
                   })
+              : Container(),
+          persistedLanguages.isNotEmpty
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: persistedLanguages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return getlatest(
+                        persistedLanguages[index].toString(),
+                        secondary_url +
+                            fetchlanguage_code(persistedLanguages[index])
+                                .toString(),
+                        "");
+                  },
+                )
               : Container(),
         ],
       ),
     );
   }
 
+  String fetchlanguage_code(String language) {
+    String language_code = "";
+    bool stop = false; //bool for checking
+    for (int i = 0; i < persistedLanguages.length; i++) {
+      if (stop) {
+        break;
+      }
+      {
+        if (language_codes.keys.elementAt(i) == language.toString()) {
+          language_code = language_codes.values.elementAt(i).toString();
+          stop = true;
+        }
+      }
+    }
+    return language_code;
+  }
+
   String check(String m) {
     bool stop = false; //bool for checking
     String val = "";
     int n = 0;
-
     //for appending the data
     for (int i = 0; i < genres_ids.length; i++) {
       if (stop) {
