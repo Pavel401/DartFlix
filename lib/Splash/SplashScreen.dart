@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Onboarding Page/Genere selection/GenreSelection.dart';
 
 class SplashScreen extends StatefulWidget {
+  static bool saw = false;
+
   @override
   _Splash createState() => _Splash();
 }
@@ -17,8 +19,10 @@ class _Splash extends State<SplashScreen> {
     bool _seen = (prefs.getBool('seen') ?? false);
 //(prefs.getBool('seen') ?? false);
     if (_seen) {
+      SplashScreen.saw = _seen;
       _handleStartScreen();
     } else {
+      SplashScreen.saw = false;
       Navigator.push(
         context,
         MaterialPageRoute(

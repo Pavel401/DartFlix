@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:indiflix/Onboarding%20Page/Language%20Selection/components/LanguageChips.dart';
+import 'package:indiflix/Splash/SplashScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
 
@@ -26,13 +29,21 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    init();
     print("Persistent Genre" + persistedGenres.toList().toString());
     print(FilterChipDisplay.filters.toList());
     print("Persistent languge" + persistedLanguages.toList().toString());
 
+        print(LanguageSelection.languages.toList());
+
+
     // int count=FilterChipDisplay
   }
-
+static Future init() async {
+    preferences = await SharedPreferences.getInstance();
+    persistedGenres = preferences.getStringList('_keygenres') ?? [];
+    persistedLanguages = preferences.getStringList('_language') ?? [];
+  }
   Map<String, int> genres_ids = {
     'Adventure': 12,
     'Fantasy': 14,
@@ -91,7 +102,8 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
               "Top Rated",
               "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
               ""),
-          persistedGenres.isNotEmpty
+
+                    SplashScreen.saw==true? persistedGenres.isNotEmpty
               ? ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
@@ -100,11 +112,23 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     return getlatest(
                         persistedGenres[index].toString(),
-                        primary_url + check(persistedGenres[index]).toString(),
+                        primary_url + fetch_genreid(persistedGenres[index]).toString(),
                         "");
                   })
-              : Container(),
-          persistedLanguages.isNotEmpty
+              : Container():FilterChipDisplay.filters.isNotEmpty
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: FilterChipDisplay.filters.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return getlatest(
+                        FilterChipDisplay.filters[index].toString(),
+                        primary_url + fetch_genreid(FilterChipDisplay.filters[index]).toString(),
+                        "");
+                  }):Container(),
+
+            SplashScreen.saw==true? persistedLanguages.isNotEmpty
               ? ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
@@ -119,7 +143,23 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
                         "");
                   },
                 )
+              : Container(): LanguageSelection.languages.isNotEmpty
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: LanguageSelection.languages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return getlatest(
+                        LanguageSelection.languages[index].toString(),
+                        secondary_url +
+                            fetchlanguage_code(LanguageSelection.languages[index])
+                                .toString(),
+                        "");
+                  },
+                )
               : Container(),
+         
         ],
       ),
     );
@@ -142,7 +182,7 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
     return language_code;
   }
 
-  String check(String m) {
+  String fetch_genreid(String m) {
     bool stop = false; //bool for checking
     String val = "";
     int n = 0;

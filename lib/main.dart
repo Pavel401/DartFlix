@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:indiflix/Navigation/Navigation.dart';
 import 'package:indiflix/Onboarding%20Page/Genere%20selection/GenreSelection.dart';
-import 'package:indiflix/Testing/Testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart' as sizer;
 import 'package:device_preview/device_preview.dart';

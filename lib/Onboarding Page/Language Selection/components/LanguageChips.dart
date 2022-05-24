@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../Snackbar/Snackbar.dart';
+import '../../../CustomSnackbar/Snackbar.dart';
 import '../../../Util/RoundedRectenguarButton.dart';
 import '../../../main.dart';
 
@@ -36,12 +36,9 @@ class _LanguageSelectionState extends State<LanguageSelection> {
               LanguageChip(chipName: 'Hindi'),
               LanguageChip(chipName: 'Bengali'),
               LanguageChip(chipName: 'Telugu'),
-              LanguageChip(chipName: 'Tamil'),
-              LanguageChip(chipName: 'Kannada'),
               LanguageChip(chipName: 'Marathi'),
               LanguageChip(chipName: 'Gujarati'),
               LanguageChip(chipName: 'Punjabi'),
-              LanguageChip(chipName: 'Oriya'),
             ],
           )),
         ),

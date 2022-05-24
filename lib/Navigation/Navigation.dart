@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Profile/Profile.dart';
 import 'package:indiflix/Screens/Home/HomePage.dart';
 import 'package:indiflix/Screens/Search/Search.dart';
+import 'package:indiflix/Swipable%20Cards/Swipablecards.dart';
 import 'package:indiflix/Watchlistbar/Watchlistbar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -45,13 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
     List routes = [
       Home(),
       Search(),
-      Search(),
+      SwipableCards(),
       Watchlistbar(),
       Profile(),
     ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
-
       body: routes[_currentPageIndex],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,

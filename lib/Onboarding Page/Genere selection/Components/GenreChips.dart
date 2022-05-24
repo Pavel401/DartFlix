@@ -7,7 +7,7 @@ import 'package:indiflix/main.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../Snackbar/Snackbar.dart';
+import '../../../CustomSnackbar/Snackbar.dart';
 import '../../../Util/RoundedRectenguarButton.dart';
 import '../../Language Selection/LanguageSelection.dart';
 
