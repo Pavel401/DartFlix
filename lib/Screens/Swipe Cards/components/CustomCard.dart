@@ -48,10 +48,13 @@ class CustomCard extends StatelessWidget {
                 color: Colors.black,
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(22.0),
+                  topRight: Radius.circular(22.0),
+                ),
                 child: FadeInImage.assetNetwork(
                   image: url.toString(),
-                  placeholder: "images/loading.png",
+                  placeholder: "assets/images/loading.png",
                   fit: BoxFit.cover,
                 ),
               ),

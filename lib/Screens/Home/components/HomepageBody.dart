@@ -125,7 +125,7 @@ class _HomepageBodyState extends State<HomepageBody> {
                   child: Image(
                     color: Colors.pink,
                     fit: BoxFit.cover,
-                    image: AssetImage("images/logo3.png"),
+                    image: AssetImage("assets/images/logo3.png"),
                   )),
               Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),

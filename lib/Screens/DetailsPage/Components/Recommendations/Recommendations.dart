@@ -222,7 +222,7 @@ class _RecommendationsState extends State<Recommendations> {
                                       child: const Image(
                                           fit: BoxFit.cover,
                                           image: const AssetImage(
-                                              'images/loading.png')))
+                                              'assets/images/loading.png')))
                                   : ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: FadeInImage.assetNetwork(
@@ -230,7 +230,7 @@ class _RecommendationsState extends State<Recommendations> {
                                             "https://image.tmdb.org/t/p/w500" +
                                                 popularlist[index]
                                                     ["poster_path"],
-                                        placeholder: "images/loading.png",
+                                        placeholder: "assets/images/loading.png",
                                         fit: BoxFit.cover,
                                       )),
                             )),
@@ -317,13 +317,13 @@ class _RecommendationsState extends State<Recommendations> {
                                 borderRadius: BorderRadius.circular(12),
                                 child: const Image(
                                     fit: BoxFit.cover,
-                                    image: AssetImage('images/loading.png')))
+                                    image: AssetImage('assets/images/loading.png')))
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: FadeInImage.assetNetwork(
                                   image: "https://image.tmdb.org/t/p/w500" +
                                       recommend[index]["poster_path"],
-                                  placeholder: "images/loading.png",
+                                  placeholder: "assets/images/loading.png",
                                   fit: BoxFit.cover,
                                 )),
                       )),

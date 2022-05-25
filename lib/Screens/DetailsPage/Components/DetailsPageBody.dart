@@ -154,7 +154,7 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                   child: const Image(
                                       fit: BoxFit.cover,
                                       image: AssetImage(
-                                        "images/loading.png",
+                                        "assets/images/loading.png",
                                       )))
                               : ShaderMask(
                                   shaderCallback: (rect) {
@@ -175,7 +175,7 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                             moviedetails[0]['backdrop_path'],
                                     height: 230,
                                     fit: BoxFit.cover,
-                                    width: double.infinity, placeholder: 'images/loading.png',
+                                    width: double.infinity, placeholder: 'assets/images/loading.png',
                                   ),
                                 ),
                           Container(

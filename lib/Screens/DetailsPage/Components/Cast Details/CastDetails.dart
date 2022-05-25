@@ -76,7 +76,7 @@ class _CastdetailsState extends State<Castdetails> {
                               borderRadius: BorderRadius.circular(4),
                               child: Image(
                                 fit: BoxFit.cover,
-                                image: AssetImage("images/loading.png"),
+                                image: AssetImage("assets/images/loading.png"),
                               ))
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(10),
@@ -84,7 +84,7 @@ class _CastdetailsState extends State<Castdetails> {
                                 image: "https://image.tmdb.org/t/p/w500" +
                                     widget.profilepath,
                                 fit: BoxFit.cover,
-                                placeholder: "images/loading.png",
+                                placeholder: "assets/images/loading.png",
                               )),
                     ),
                     Expanded(
@@ -151,7 +151,7 @@ class _CastdetailsState extends State<Castdetails> {
                       borderRadius: BorderRadius.circular(12),
                       child: Image(
                         fit: BoxFit.fitHeight,
-                        image: AssetImage("images/loading.png"),
+                        image: AssetImage("assets/images/loading.png"),
                       ))
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(12),

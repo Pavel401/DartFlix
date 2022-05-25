@@ -185,13 +185,13 @@ class _SearchQueryState extends State<SearchQuery> {
                                 borderRadius: BorderRadius.circular(4),
                                 child: Image(
                                     fit: BoxFit.cover,
-                                    image: AssetImage('images/loading.png')))
+                                    image: AssetImage('assets/images/loading.png')))
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(4),
                                 child: FadeInImage.assetNetwork(
                                   image: "https://image.tmdb.org/t/p/w500" +
                                       search_result[index]["poster_path"],
-                                  placeholder: "images/loading.png",
+                                  placeholder: "assets/images/loading.png",
                                   fit: BoxFit.cover,
                                 ),
                               ),

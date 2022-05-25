@@ -34,16 +34,17 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
     print(FilterChipDisplay.filters.toList());
     print("Persistent languge" + persistedLanguages.toList().toString());
 
-        print(LanguageSelection.languages.toList());
-
+    print(LanguageSelection.languages.toList());
 
     // int count=FilterChipDisplay
   }
-static Future init() async {
+
+  static Future init() async {
     preferences = await SharedPreferences.getInstance();
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
   }
+
   Map<String, int> genres_ids = {
     'Adventure': 12,
     'Fantasy': 14,
@@ -102,64 +103,71 @@ static Future init() async {
               "Top Rated",
               "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
               ""),
-
-                    SplashScreen.saw==true? persistedGenres.isNotEmpty
-              ? ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: persistedGenres.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return getlatest(
-                        persistedGenres[index].toString(),
-                        primary_url + fetch_genreid(persistedGenres[index]).toString(),
-                        "");
-                  })
-              : Container():FilterChipDisplay.filters.isNotEmpty
-              ? ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: FilterChipDisplay.filters.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return getlatest(
-                        FilterChipDisplay.filters[index].toString(),
-                        primary_url + fetch_genreid(FilterChipDisplay.filters[index]).toString(),
-                        "");
-                  }):Container(),
-
-            SplashScreen.saw==true? persistedLanguages.isNotEmpty
-              ? ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: persistedLanguages.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return getlatest(
-                        persistedLanguages[index].toString(),
-                        secondary_url +
-                            fetchlanguage_code(persistedLanguages[index])
-                                .toString(),
-                        "");
-                  },
-                )
-              : Container(): LanguageSelection.languages.isNotEmpty
-              ? ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: LanguageSelection.languages.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return getlatest(
-                        LanguageSelection.languages[index].toString(),
-                        secondary_url +
-                            fetchlanguage_code(LanguageSelection.languages[index])
-                                .toString(),
-                        "");
-                  },
-                )
-              : Container(),
-         
+          SplashScreen.saw == true
+              ? persistedGenres.isNotEmpty
+                  ? ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: persistedGenres.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return getlatest(
+                            persistedGenres[index].toString(),
+                            primary_url +
+                                fetch_genreid(persistedGenres[index])
+                                    .toString(),
+                            "");
+                      })
+                  : Container()
+              : FilterChipDisplay.filters.isNotEmpty
+                  ? ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: FilterChipDisplay.filters.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return getlatest(
+                            FilterChipDisplay.filters[index].toString(),
+                            primary_url +
+                                fetch_genreid(FilterChipDisplay.filters[index])
+                                    .toString(),
+                            "");
+                      })
+                  : Container(),
+          SplashScreen.saw == true
+              ? persistedLanguages.isNotEmpty
+                  ? ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: persistedLanguages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return getlatest(
+                            persistedLanguages[index].toString(),
+                            secondary_url +
+                                fetchlanguage_code(persistedLanguages[index])
+                                    .toString(),
+                            "");
+                      },
+                    )
+                  : Container()
+              : LanguageSelection.languages.isNotEmpty
+                  ? ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: LanguageSelection.languages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return getlatest(
+                            LanguageSelection.languages[index].toString(),
+                            secondary_url +
+                                fetchlanguage_code(
+                                        LanguageSelection.languages[index])
+                                    .toString(),
+                            "");
+                      },
+                    )
+                  : Container(),
         ],
       ),
     );
@@ -280,13 +288,14 @@ static Future init() async {
           children: [
             Row(children: [
               const SizedBox(
-                  height: 43,
-                  width: 43,
-                  child: Image(
-                    color: Colors.pink,
-                    fit: BoxFit.cover,
-                    image: AssetImage("images/logo3.png"),
-                  )),
+                height: 43,
+                width: 43,
+                child: Image(
+                  color: Colors.pink,
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/logo3.png"),
+                ),
+              ),
               Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),
                   baseColor: (Colors.grey[100])!,

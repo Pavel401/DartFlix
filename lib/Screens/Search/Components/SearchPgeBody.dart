@@ -16,43 +16,43 @@ class SearchPageBody extends StatefulWidget {
 class _SearchPageBodyState extends State<SearchPageBody> {
   @override
   List movie_data = [
-    {"name": "top", "color": Colors.red, "image": "images/action.jpg"},
-    {"name": "Bollywood", "color": Colors.blue, "image": "images/adventu.jpg"},
-    {"name": "Folk", "color": Colors.green, "image": "images/animation.jpg"},
-    {"name": "Hip Hop", "color": Colors.yellow, "image": "images/comedy.jpg"},
-    {"name": "top", "color": Colors.pink, "image": "images/crime.jpg"},
+    {"name": "top", "color": Colors.red, "image": "assets/images/action.jpg"},
+    {"name": "Bollywood", "color": Colors.blue, "image": "assets/images/adventu.jpg"},
+    {"name": "Folk", "color": Colors.green, "image": "assets/images/animation.jpg"},
+    {"name": "Hip Hop", "color": Colors.yellow, "image": "assets/images/comedy.jpg"},
+    {"name": "top", "color": Colors.pink, "image": "assets/images/crime.jpg"},
     {
       "name": "Bollywood",
       "color": Colors.pinkAccent,
-      "image": "images/doc.jpg"
+      "image": "assets/images/doc.jpg"
     },
-    {"name": "Folk", "color": Colors.indigo, "image": "images/dram.jpg"},
+    {"name": "Folk", "color": Colors.indigo, "image": "assets/images/dram.jpg"},
     {
       "name": "Hip Hop",
       "color": Colors.deepOrangeAccent,
-      "image": "images/family.jpg"
+      "image": "assets/images/family.jpg"
     },
-    {"name": "Hip Hop", "color": Colors.purple, "image": "images/fantasy.jpg"},
+    {"name": "Hip Hop", "color": Colors.purple, "image": "assets/images/fantasy.jpg"},
     {
       "name": "top",
       "color": Colors.lightGreenAccent,
-      "image": "images/history.jpg"
+      "image": "assets/images/history.jpg"
     },
     {
       "name": "Bollywood",
       "color": Colors.blueGrey,
-      "image": "images/horror.jpg"
+      "image": "assets/images/horror.jpg"
     },
-    {"name": "Folk", "color": Colors.green[200], "image": "images/music.jpg"},
+    {"name": "Folk", "color": Colors.green[200], "image": "assets/images/music.jpg"},
     {
       "name": "Hip Hop",
       "color": Colors.tealAccent,
-      "image": "images/mystery.jpg"
+      "image": "assets/images/mystery.jpg"
     },
     {
       "name": "top",
       "color": Colors.deepPurpleAccent,
-      "image": "images/romance.jpg"
+      "image": "assets/images/romance.jpg"
     },
   ];
 

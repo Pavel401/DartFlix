@@ -4,8 +4,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Profile/Profile.dart';
 import 'package:indiflix/Screens/Home/HomePage.dart';
 import 'package:indiflix/Screens/Search/Search.dart';
-import 'package:indiflix/Swipable%20Cards/Swipablecards.dart';
 import 'package:indiflix/Watchlistbar/Watchlistbar.dart';
+
+import '../Screens/Swipe Cards/Swipablecards.dart';
 
 class MyHomePage extends StatefulWidget {
   final List<Page> _pages = [

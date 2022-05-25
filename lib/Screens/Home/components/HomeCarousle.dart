@@ -130,7 +130,7 @@ class _MovieCardState extends State<MovieCard> {
                 fit: BoxFit.fitWidth,
                 image: "https://image.tmdb.org/t/p/original" +
                     val[widget.digit.toInt()]['poster_path'],
-                placeholder: "images/loading.png",
+                placeholder: "assets/images/loading.png",
               ),
             ),
           ),

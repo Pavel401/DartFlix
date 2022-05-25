@@ -271,7 +271,7 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                         borderRadius: BorderRadius.circular(12),
                                         child: const Image(
                                           image:
-                                              AssetImage("images/loading.png"),
+                                              AssetImage("assets/images/loading.png"),
                                           fit: BoxFit.cover,
                                         ))
                                     : ClipRRect(
@@ -280,7 +280,7 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                           image:
                                               "https://image.tmdb.org/t/p/w500" +
                                                   val[index]["poster_path"],
-                                          placeholder: "images/loading.png",
+                                          placeholder: "assets/images/loading.png",
                                           fit: BoxFit.cover,
                                         ))),
                             Positioned(

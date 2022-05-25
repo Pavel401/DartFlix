@@ -63,13 +63,13 @@ class _MovieCardState extends State<MovieCard> {
                           borderRadius: BorderRadius.circular(4),
                           child: Image(
                             fit: BoxFit.cover,
-                            image: AssetImage("images/loading.png"),
+                            image: AssetImage("assets/images/loading.png"),
                           ))
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: FadeInImage.assetNetwork(
                             image: this.widget.url.toString(),
-                            placeholder: "images/loading.png",
+                            placeholder: "assets/images/loading.png",
                             fit: BoxFit.cover,
                           ),
                         ),
