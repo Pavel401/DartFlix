@@ -51,6 +51,8 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/GenreSelection': (context) => GenreSelection(),
           '/LanguageSelection': (context) => BuildLanguageSelection(),
+                    '/Splash': (context) => SplashScreen(),
+
         },
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),

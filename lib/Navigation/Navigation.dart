@@ -12,9 +12,9 @@ class MyHomePage extends StatefulWidget {
   final List<Page> _pages = [
     Page('Home', Icons.home, 30),
     Page('search', Icons.search, 30),
-    Page('Explore', Icons.question_answer_rounded, 30),
+    Page('Suggest', Icons.assistant, 30),
     Page('library', Icons.playlist_play_sharp, 35),
-    Page('profile', Icons.person_outline, 30),
+    Page('Profile', Icons.person_outline, 30),
   ];
 
   final userid;
@@ -53,10 +53,21 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: routes[_currentPageIndex],
+      body: SafeArea(
+        child: IndexedStack(
+          index: _currentPageIndex,
+          children: const [
+            Home(),
+            Search(),
+            SwipableCards(),
+            Watchlistbar(),
+            Profile(),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         backgroundColor: HexColor("#272727"),
         selectedItemColor: Colors.white,

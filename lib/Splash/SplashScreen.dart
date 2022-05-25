@@ -50,7 +50,12 @@ class _Splash extends State<SplashScreen> {
   }
 
   Future<void> _handleStartScreen() async {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MyHomePage(userid: "userid")));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return MyHomePage(userid: "userid");
+      }),
+      ModalRoute.withName('/Splash'),
+    );
   }
 }

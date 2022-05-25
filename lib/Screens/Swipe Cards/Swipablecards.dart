@@ -9,6 +9,7 @@ import 'package:swipe_cards/swipe_cards.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../DetailsPage/Components/DetailsPageBody.dart';
+import 'Model/data.dart';
 import 'components/CustomAlert.dart';
 
 class SwipableCards extends StatefulWidget {
@@ -86,241 +87,240 @@ class _SwipableCardsState extends State<SwipableCards> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("#121212"),
-      appBar: AppBar(
-        backgroundColor: HexColor("#272727"),
-        title: Text(
-          "Sugest a Movie",
-          style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+        backgroundColor: HexColor("#121212"),
+        appBar: AppBar(
+          backgroundColor: HexColor("#272727"),
+          title: Text(
+            "Sugest a Movie",
+            style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-      body: val.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : Center(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: Colors.transparent,
-                      height: 73.h,
-                      width: 90.w,
-                      child: SwipeCards(
-                        matchEngine: _matchEngine!,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 70.h,
-                            width: 90.w,
-                            alignment: Alignment.bottomLeft,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.white,
-                                style: BorderStyle.solid,
-                                width: 0.5,
-                              ),
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 90.w,
-                                  height: 50.h,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(22.0),
-                                      topRight: Radius.circular(22.0),
-                                    ),
-                                    color: Colors.black,
+        body: val.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: Center(
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          height: 75.h,
+                          width: 90.w,
+                          child: SwipeCards(
+                            matchEngine: _matchEngine!,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 70.h,
+                                width: 90.w,
+                                alignment: Alignment.bottomLeft,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    style: BorderStyle.solid,
+                                    width: 0.5,
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(22.0),
-                                      topRight: Radius.circular(22.0),
-                                    ),
-                                    child: FadeInImage.assetNetwork(
-                                      image:
-                                          "https://image.tmdb.org/t/p/original" +
-                                              images[index].toString(),
-                                      placeholder: "assets/images/loading.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(22.0),
                                 ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                SizedBox(
-                                  width: 80.w,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: TextScroll(
-                                          names[index] == "NULL"
-                                              ? "N/A"
-                                              : names[index].toString(),
-                                          velocity: Velocity(
-                                              pixelsPerSecond: Offset(20, 0)),
-                                          pauseBetween:
-                                              Duration(milliseconds: 1000),
-                                          mode: TextScrollMode.bouncing,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: HexColor("#DEDEDE"),
-                                              fontSize: 20),
-                                          textAlign: TextAlign.right,
-                                          selectable: false,
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 90.w,
+                                      height: 50.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(22.0),
+                                          topRight: Radius.circular(22.0),
+                                        ),
+                                        color: Colors.black,
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(22.0),
+                                          topRight: Radius.circular(22.0),
+                                        ),
+                                        child: FadeInImage.assetNetwork(
+                                          image:
+                                              "https://image.tmdb.org/t/p/original" +
+                                                  images[index].toString(),
+                                          placeholder:
+                                              "assets/images/loading.png",
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                SizedBox(
-                                  width: 80.w,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: TextScroll(
-                                          releaseyear[index] == "NULL"
-                                              ? "Release Date" + "N/A"
-                                              : "Release Date : " +
-                                                  releaseyear[index].toString(),
-                                          velocity: Velocity(
-                                              pixelsPerSecond: Offset(20, 0)),
-                                          pauseBetween:
-                                              Duration(milliseconds: 1000),
-                                          mode: TextScrollMode.bouncing,
-                                          style: TextStyle(
-                                              color: HexColor("#DEDEDE"),
-                                              fontSize: 15),
-                                          textAlign: TextAlign.right,
-                                          selectable: false,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                SizedBox(
-                                  width: 80.w,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: TextScroll(
-                                          ratings[index] == "NULL"
-                                              ? "Ratings : " + "⭐ " + "N/A"
-                                              : "Ratings : " +
-                                                  "⭐ " +
-                                                  ratings[index].toString(),
-                                          velocity: Velocity(
-                                              pixelsPerSecond: Offset(20, 0)),
-                                          pauseBetween:
-                                              Duration(milliseconds: 1000),
-                                          mode: TextScrollMode.bouncing,
-                                          style: TextStyle(
-                                              color: HexColor("#DEDEDE"),
-                                              fontSize: 15),
-                                          textAlign: TextAlign.right,
-                                          selectable: false,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 80.w,
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailsPageBody(
-                                                moviename: names[index],
-                                              ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    SizedBox(
+                                      width: 80.w,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: TextScroll(
+                                              names[index] == "NULL"
+                                                  ? "N/A"
+                                                  : names[index].toString(),
+                                              velocity: Velocity(
+                                                  pixelsPerSecond:
+                                                      Offset(20, 0)),
+                                              pauseBetween:
+                                                  Duration(milliseconds: 1000),
+                                              mode: TextScrollMode.bouncing,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: HexColor("#DEDEDE"),
+                                                  fontSize: 20),
+                                              textAlign: TextAlign.right,
+                                              selectable: false,
                                             ),
-                                          );
-                                        },
-                                        child: Icon(
-                                          Icons.play_circle_outline,
-                                          color: Colors.white,
-                                          size: 40,
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
+                                    SizedBox(
+                                      width: 80.w,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: TextScroll(
+                                              releaseyear[index] == "NULL"
+                                                  ? "Release Date" + "N/A"
+                                                  : "Release Date : " +
+                                                      releaseyear[index]
+                                                          .toString(),
+                                              velocity: Velocity(
+                                                  pixelsPerSecond:
+                                                      Offset(20, 0)),
+                                              pauseBetween:
+                                                  Duration(milliseconds: 1000),
+                                              mode: TextScrollMode.bouncing,
+                                              style: TextStyle(
+                                                  color: HexColor("#DEDEDE"),
+                                                  fontSize: 15),
+                                              textAlign: TextAlign.right,
+                                              selectable: false,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
+                                    SizedBox(
+                                      width: 80.w,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: TextScroll(
+                                              ratings[index] == "NULL"
+                                                  ? "Ratings : " + "⭐ " + "N/A"
+                                                  : "Ratings : " +
+                                                      "⭐ " +
+                                                      ratings[index].toString(),
+                                              velocity: Velocity(
+                                                  pixelsPerSecond:
+                                                      Offset(20, 0)),
+                                              pauseBetween:
+                                                  Duration(milliseconds: 1000),
+                                              mode: TextScrollMode.bouncing,
+                                              style: TextStyle(
+                                                  color: HexColor("#DEDEDE"),
+                                                  fontSize: 15),
+                                              textAlign: TextAlign.right,
+                                              selectable: false,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 80.w,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailsPageBody(
+                                                    moviename: names[index],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Icon(
+                                              Icons.play_circle_outline,
+                                              color: Colors.white,
+                                              size: 40,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                        onStackFinished: () {
-                          return ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('The List is over')));
-                        },
-                      ),
-                    ),
-                    Container(
-                      height: 7.h,
-                      // color: Colors.green,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                              onTap: () {
-                                _matchEngine!.currentItem!.nope();
-                              },
-                              child: buttonWidget(
-                                  Icons.close, HexColor("#7220C9"))),
-                          InkWell(
-                            onTap: () {
-                              _matchEngine!.currentItem!.like();
+                              );
                             },
-                            child: buttonWidget(Icons.favorite_outline_outlined,
-                                HexColor("#7220C9")),
+                            onStackFinished: () {
+                              return ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('The List is over')));
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                        Container(
+                          height: 7.h,
+                          // color: Colors.green,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                  onTap: () {
+                                    _matchEngine!.currentItem!.nope();
+                                  },
+                                  child: buttonWidget(
+                                      Icons.close, HexColor("#7220C9"))),
+                              InkWell(
+                                onTap: () {
+                                  _matchEngine!.currentItem!.like();
+                                },
+                                child: buttonWidget(
+                                    Icons.favorite_outline_outlined,
+                                    HexColor("#7220C9")),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-    );
+              ));
   }
 }
 
-class Content {
-  final String? title;
-  final String? rating;
-  final String? year;
-  final String? url;
-
-  Content({
-    this.title,
-    this.rating,
-    this.year,
-    this.url,
-  });
-}
