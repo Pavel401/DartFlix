@@ -11,6 +11,10 @@ import 'Splash/SplashScreen.dart';
 late SharedPreferences preferences;
 List persistedGenres = [];
 List persistedLanguages = [];
+List <String>remembermovies = [];
+List <String>remembermoviesurl = [];
+List <String>recommemdedmovies = [];
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -40,6 +44,10 @@ class _MyAppState extends State<MyApp> {
     preferences = await SharedPreferences.getInstance();
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
+    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
+        recommemdedmovies = preferences.getStringList('savedrecommendation') ?? [];
+
+
   }
 
   // This widget is the root of your application.
@@ -51,8 +59,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/GenreSelection': (context) => GenreSelection(),
           '/LanguageSelection': (context) => BuildLanguageSelection(),
-                    '/Splash': (context) => SplashScreen(),
-
+          '/Splash': (context) => SplashScreen(),
         },
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),

@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:indiflix/Screens/CustomListFromUserHistory/Model/History.dart';
 import 'package:indiflix/Screens/DetailsPage/Components/DetailsPageBody.dart';
+import 'package:indiflix/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+
+List<String> movielist = [];
 
 class FetchHorizontalMovieList extends StatefulWidget {
   final url;
@@ -209,6 +216,29 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
         });
   }
 
+  List<String> movies = [];
+  void storedata(String name, String url, String id) async {
+    User user = User(
+      name,
+      url,
+      id,
+    );
+    String userdata = jsonEncode(user);
+    print("userdata is" + userdata.toString());
+   
+    movies.add(userdata.toString());
+    // print(movies.toString());
+    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
+     for(int i=0;i<remembermovies.length;i++){
+      if(remembermovies[i]==userdata){
+        return;
+      }
+    }
+    remembermovies.add(userdata.toString());
+    remembermovies.toSet().toList();
+    preferences.setStringList("savedmoviehistory", remembermovies);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (val.isEmpty) {
@@ -243,6 +273,11 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                     onTap: () {
+                      storedata(
+                          val[index]["original_title"].toString(),
+                          "https://image.tmdb.org/t/p/w500" +
+                              val[index]["poster_path"].toString(),
+                          val[index]["id"].toString());
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -270,8 +305,8 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
                                         child: const Image(
-                                          image:
-                                              AssetImage("assets/images/loading.png"),
+                                          image: AssetImage(
+                                              "assets/images/loading.png"),
                                           fit: BoxFit.cover,
                                         ))
                                     : ClipRRect(
@@ -280,7 +315,8 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                           image:
                                               "https://image.tmdb.org/t/p/w500" +
                                                   val[index]["poster_path"],
-                                          placeholder: "assets/images/loading.png",
+                                          placeholder:
+                                              "assets/images/loading.png",
                                           fit: BoxFit.cover,
                                         ))),
                             Positioned(

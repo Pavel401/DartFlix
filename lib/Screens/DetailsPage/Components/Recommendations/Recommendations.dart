@@ -124,7 +124,10 @@ class _RecommendationsState extends State<Recommendations> {
     contentbasedrecommendations();
     apibased();
   }
-
+ List<String> movies = [];
+  void storedata(String name, String url, String id) async {
+   
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -145,6 +148,42 @@ class _RecommendationsState extends State<Recommendations> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.none)),
+            ),
+            InkWell(
+              onTap: () {
+                storedata(
+                    recommend[0]["original_title"].toString(),
+                    "https://image.tmdb.org/t/p/w500" +
+                        recommend[0]["poster_path"].toString(),
+                    recommend[0]["id"].toString());
+              },
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                width: 80.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.blueGrey),
+                child: Row(
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.only(bottom: 4, left: 10),
+                        child: const Icon(AntDesign.like1,
+                            size: 22, color: Colors.white)),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(bottom: 4, left: 5, top: 2),
+                      child: const Text(
+                        "Like these recommendations ?",
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             getallpopularmoviecard(),
             getallpopularmoviecards(),
