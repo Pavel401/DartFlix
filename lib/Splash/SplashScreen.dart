@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:indiflix/Navigation/Navigation.dart';
+import 'package:indiflix/Screens/Introduction%20Screen/IntroductionScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Onboarding Page/Genere selection/GenreSelection.dart';
@@ -27,7 +28,7 @@ class _Splash extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return GenreSelection();
+            return IntroductionPage();
           },
         ),
       );

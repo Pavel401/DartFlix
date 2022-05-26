@@ -223,60 +223,61 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
 
   Widget TopShimmer(name, url) {
     return Container(
-        margin: EdgeInsets.only(top: 15, right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: 25,
-                  width: 5,
-                  margin: EdgeInsets.only(right: 8, left: 2),
-                  decoration: BoxDecoration(color: HexColor("#7220C9")),
-                ),
-                Shimmer.fromColors(
-                    period: Duration(milliseconds: 2000),
-                    baseColor: (Colors.grey[100])!,
-                    direction: ShimmerDirection.ltr,
-                    highlightColor: (Colors.grey[800])!,
-                    child: Container(
-                        width: 250,
-                        child: Text(name,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold)))),
-              ],
-            ),
-            Container(
-                child: InkWell(
+      margin: EdgeInsets.only(top: 15, right: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Container(
+                height: 25,
+                width: 5,
+                margin: EdgeInsets.only(right: 8, left: 2),
+                decoration: BoxDecoration(color: HexColor("#7220C9")),
+              ),
+              Shimmer.fromColors(
+                  period: Duration(milliseconds: 2000),
+                  baseColor: (Colors.grey[100])!,
+                  direction: ShimmerDirection.ltr,
+                  highlightColor: (Colors.grey[800])!,
+                  child: Container(
+                      width: 250,
+                      child: Text(name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold)))),
+            ],
+          ),
+          Container(
+              child: InkWell(
+            highlightColor: Colors.grey,
+            hoverColor: Colors.white,
+            onTap: () {},
+            child: InkWell(
               highlightColor: Colors.grey,
               hoverColor: Colors.white,
-              onTap: () {},
-              child: InkWell(
-                highlightColor: Colors.grey,
-                hoverColor: Colors.white,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => MoreMoviesPage(
-                            url: url,
-                            originalmoviename: name,
-                          )),
-                    ),
-                  );
-                },
-                child: Text("See More",
-                    style: TextStyle(
-                        color: Colors.white,
-                        //fontWeight: FontWeight.bold,
-                        fontSize: 15)),
-              ),
-            ))
-          ],
-        ));
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => MoreMoviesPage(
+                          url: url,
+                          originalmoviename: name,
+                        )),
+                  ),
+                );
+              },
+              child: Text("See More",
+                  style: TextStyle(
+                      color: Colors.white,
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 15)),
+            ),
+          ))
+        ],
+      ),
+    );
   }
 
   Widget gethead() {
@@ -286,29 +287,26 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(children: [
-              const SizedBox(
-                height: 43,
-                width: 43,
-                child: Image(
-                  color: Colors.pink,
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/logo3.png"),
-                ),
-              ),
-              Shimmer.fromColors(
+            Row(
+              children: [
+                Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),
                   baseColor: (Colors.grey[100])!,
                   direction: ShimmerDirection.ltr,
                   highlightColor: (Colors.grey[800])!,
                   child: Container(
-                      margin: EdgeInsets.only(top: 3),
-                      child: const Text("Dart Flix",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 19,
-                              fontWeight: FontWeight.bold)))),
-            ]),
+                    margin: EdgeInsets.only(top: 3),
+                    child: const Text(
+                      "Dart Flix",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             InkWell(
                 highlightColor: Colors.grey,
                 hoverColor: Colors.white,

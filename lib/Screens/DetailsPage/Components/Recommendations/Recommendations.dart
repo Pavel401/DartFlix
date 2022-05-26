@@ -147,20 +147,7 @@ class _RecommendationsState extends State<Recommendations> {
                       decoration: TextDecoration.none)),
             ),
             getallpopularmoviecard(),
-            Container(
-              margin: EdgeInsets.only(
-                top: 2.h,
-                left: 2.w,
-                right: 2.w,
-              ),
-              child: Text("You might also like(TMDB API)",
-                  style: TextStyle(
-                      color: HexColor("#7220C9"),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.none)),
-            ),
-            getallpopularmoviecards()
+            getallpopularmoviecards(),
           ],
         ),
       ),
@@ -230,7 +217,8 @@ class _RecommendationsState extends State<Recommendations> {
                                             "https://image.tmdb.org/t/p/w500" +
                                                 popularlist[index]
                                                     ["poster_path"],
-                                        placeholder: "assets/images/loading.png",
+                                        placeholder:
+                                            "assets/images/loading.png",
                                         fit: BoxFit.cover,
                                       )),
                             )),
@@ -265,9 +253,9 @@ class _RecommendationsState extends State<Recommendations> {
               itemBuilder: (BuildContext context, int index) {
                 return Shimmer.fromColors(
                   period: const Duration(milliseconds: 2000),
-                 baseColor:  HexColor("#8970A4"),
-          direction: ShimmerDirection.ltr,
-          highlightColor:HexColor("#463567") ,
+                  baseColor: HexColor("#8970A4"),
+                  direction: ShimmerDirection.ltr,
+                  highlightColor: HexColor("#463567"),
                   child: Container(
                     height: 160,
                     margin: const EdgeInsets.all(6.0),
@@ -317,7 +305,8 @@ class _RecommendationsState extends State<Recommendations> {
                                 borderRadius: BorderRadius.circular(12),
                                 child: const Image(
                                     fit: BoxFit.cover,
-                                    image: AssetImage('assets/images/loading.png')))
+                                    image: AssetImage(
+                                        'assets/images/loading.png')))
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: FadeInImage.assetNetwork(
