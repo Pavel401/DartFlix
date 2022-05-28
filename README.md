@@ -111,7 +111,11 @@ Debug the app
 ## Cosine Similarity used here :
   Cosine similarity is a metric used to measure how similar the documents are irrespective of their size. Mathematically, it measures the cosine of the angle between two vectors projected in a multi-dimensional space. The cosine similarity is advantageous because even if the two similar documents are far apart by the Euclidean distance (due to the size of the document), chances are they may still be oriented closer together. The smaller the angle, higher the cosine similarity.
   
-  ![Uzoma Medium Gif](https://github.com/Gourav1695/Filmy-The_Movie_Recommender/blob/main/screenshot/cosine_similarity.png)
+<p align="center">
+  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653718616/1_IhpY-6LYV75983THCpWo-w.png" alt="demo"/>
+</p>
+
+  
 ## Machine learning model used:
 
 I have incorporated machine learning models like a bag of words, tf - idf vectorization, similarity analysis, and review analysis based on multinomial naïve bays algorithm. Which is a Bayesian learning approach popular in Natural Language Processing (NLP).
