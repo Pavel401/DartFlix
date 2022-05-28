@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/Home/components/HomeCarousle.dart';
 import 'package:indiflix/Screens/Swipe%20Cards/components/BottomBar.dart';
@@ -116,6 +117,7 @@ List<String> movies = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: HexColor("#121212"),
         appBar: AppBar(
           backgroundColor: HexColor("#272727"),
@@ -330,12 +332,17 @@ List<String> movies = [];
                             children: [
                               InkWell(
                                   onTap: () {
+
                                     _matchEngine!.currentItem!.nope();
+                                         var _type = FeedbackType.warning;
+                    Vibrate.feedback(_type);
                                   },
                                   child: buttonWidget(
                                       Icons.close, HexColor("#7220C9"))),
                               InkWell(
                                 onTap: () {
+                                       var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
                                   _matchEngine!.currentItem!.like();
                                 },
                                 child: buttonWidget(

@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/DetailsPage/Components/DetailsPageBody.dart';
@@ -181,6 +182,8 @@ class _RecommendationsState extends State<Recommendations> {
             recommend.isNotEmpty
                 ? InkWell(
                     onTap: () {
+                           var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
                       storedata(
                           recommend[0]["original_title"].toString(),
                           "https://image.tmdb.org/t/p/w500" +
@@ -274,7 +277,10 @@ class _RecommendationsState extends State<Recommendations> {
                     child: Stack(
                       children: [
                         GestureDetector(
+                          
                             onTap: () {
+                                   var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

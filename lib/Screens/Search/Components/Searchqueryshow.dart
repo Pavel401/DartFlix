@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
@@ -121,6 +122,8 @@ class _SearchQueryState extends State<SearchQuery> {
               ),
               leading: InkWell(
                 onTap: () {
+                       var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
                   Navigator.pop(context);
                 },
                 child: Icon(
@@ -200,6 +203,8 @@ class _SearchQueryState extends State<SearchQuery> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () async {
+                   var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
               Navigator.push(
                 context,
                 MaterialPageRoute(

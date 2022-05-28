@@ -9,7 +9,6 @@ import 'package:indiflix/Splash/SplashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../Onboarding Page/Genere selection/Components/GenreChips.dart';
 import '../../../main.dart';
 import '../../CustomListFromUserHistory/Model/History.dart';
@@ -126,7 +125,7 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
           SizedBox(
             height: 4.h,
           ),
-              getlatest(
+          getlatest(
               "Top Rated",
               "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
               ""),
@@ -203,7 +202,6 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
               : SizedBox(
                   height: 0.h,
                 ),
-      
           recommemdedmovies.isNotEmpty
               ? Container(
                   child: Column(
@@ -601,7 +599,9 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
                       fit: BoxFit.cover,
                       image: AssetImage("assets/images/logot.png"),
                     )),
-                    SizedBox(width: 3.w,),
+                SizedBox(
+                  width: 3.w,
+                ),
                 Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),
                   baseColor: (Colors.grey[100])!,

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/Genre%20List/GenreWiseMovies.dart';
 
@@ -127,6 +128,8 @@ class _SearchPageBodyState extends State<SearchPageBody> {
       ),
       child: TextField(
         onTap: () {
+               var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => SearchQuery()));
         },
@@ -166,6 +169,8 @@ class _SearchPageBodyState extends State<SearchPageBody> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                     onTap: () {
+                           var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
@@ -88,6 +89,8 @@ class _CastState extends State<Cast> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                   onTap: () {
+                         var _type = FeedbackType.success;
+                    Vibrate.feedback(_type);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -56,9 +56,10 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
       );
     }
   }
-launchurl2() async {
+
+  launchurl2() async {
     String url = "https://www.youtube.com/results?search_query=" +
-      moviedetails[0]['original_title'];
+        moviedetails[0]['original_title'];
     if (await canLaunch(url) != null) {
       launch(url);
     } else {
@@ -82,6 +83,7 @@ launchurl2() async {
       );
     }
   }
+
   void getpopularresponse() async {
     if (widget.moviename == null || widget.moviename == "") {
       Navigator.push(
@@ -124,8 +126,8 @@ launchurl2() async {
   Future<bool> _willPopCallback() async {
     // await showDialog or Show add banners or whatever
     // then
-Navigator.pop(context);
-      remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
+    Navigator.pop(context);
+    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
 
     return Future.value(true);
   }
@@ -265,10 +267,13 @@ Navigator.pop(context);
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                   InkWell(
+                                    InkWell(
                                         onTap: () {
-                                           moviedetails[1]["results"].toString().contains("key")?
-                                          launchurl():launchurl2();
+                                          moviedetails[1]["results"]
+                                                  .toString()
+                                                  .contains("key")
+                                              ? launchurl()
+                                              : launchurl2();
                                         },
                                         child: Container(
                                             padding: const EdgeInsets.all(5),
