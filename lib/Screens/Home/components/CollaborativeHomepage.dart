@@ -126,6 +126,10 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
           SizedBox(
             height: 4.h,
           ),
+              getlatest(
+              "Top Rated",
+              "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
+              ""),
           remembermovies.isNotEmpty
               ? Container(
                   child: Column(
@@ -199,10 +203,7 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
               : SizedBox(
                   height: 0.h,
                 ),
-          getlatest(
-              "Top Rated",
-              "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
-              ""),
+      
           recommemdedmovies.isNotEmpty
               ? Container(
                   child: Column(
@@ -596,10 +597,11 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
                     height: 43,
                     width: 43,
                     child: Image(
-                      color: Colors.pink,
+                      color: HexColor("#7220C9"),
                       fit: BoxFit.cover,
                       image: AssetImage("assets/images/logot.png"),
                     )),
+                    SizedBox(width: 3.w,),
                 Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),
                   baseColor: (Colors.grey[100])!,

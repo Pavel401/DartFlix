@@ -56,7 +56,32 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
       );
     }
   }
-
+launchurl2() async {
+    String url = "https://www.youtube.com/results?search_query=" +
+      moviedetails[0]['original_title'];
+    if (await canLaunch(url) != null) {
+      launch(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Container(
+            height: 25,
+            alignment: Alignment.center,
+            child: const Text(
+              "Trailer not found",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          action: SnackBarAction(
+            label: 'Cancel',
+            onPressed: () {
+              // Code to execute.
+            },
+          ),
+        ),
+      );
+    }
+  }
   void getpopularresponse() async {
     if (widget.moviename == null || widget.moviename == "") {
       Navigator.push(
@@ -240,9 +265,10 @@ Navigator.pop(context);
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    InkWell(
+                                   InkWell(
                                         onTap: () {
-                                          launchurl();
+                                           moviedetails[1]["results"].toString().contains("key")?
+                                          launchurl():launchurl2();
                                         },
                                         child: Container(
                                             padding: const EdgeInsets.all(5),
