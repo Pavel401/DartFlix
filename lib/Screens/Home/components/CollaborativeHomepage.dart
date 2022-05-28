@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -26,6 +27,8 @@ class CollaborativeHomePage extends StatefulWidget {
 }
 
 class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
+    late Timer timer;
+
   String primary_url =
       "https://api.themoviedb.org/3/discover/movie?api_key=ebe86eb4e04342d7598d4096a16d8d11&with_genres=";
   String secondary_url =
@@ -43,14 +46,25 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
     //  print("Persistent languge" + persistedLanguages.toList().toString());
 
     //  print(LanguageSelection.languages.toList());
-    // print("Remember movies" + remembermovies.toString());
-
+    print("Remember movies" + recommemdedmovies.toString());
+      Timer.periodic(Duration(seconds: 5), (timer) {
+        init();
+        setState(() {});
+    });
+super.initState();
     // int count=FilterChipDisplay
   }
-
+@override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
   static Future init() async {
     preferences = await SharedPreferences.getInstance();
     remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
+    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
+    recommemdedmovies = recommemdedmovies.reversed.toList();
+    remembermovies = remembermovies.reversed.toList();
 
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
@@ -171,18 +185,7 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
                                                   fit: BoxFit.cover),
                                             ),
                                     ),
-                                    Positioned(
-                                      bottom: 3,
-                                      right: 0,
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            //add the ontap method after clicking the three dot menu
-                                          },
-                                          child: const Icon(
-                                            Icons.more_vert,
-                                            color: Colors.white,
-                                          )),
-                                    ),
+                                    
                                   ],
                                 ),
                               ),
@@ -196,7 +199,7 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
               : SizedBox(
                   height: 0.h,
                 ),
-                recommemdedmovies.isNotEmpty
+          recommemdedmovies.isNotEmpty
               ? Container(
                   child: Column(
                     children: [
@@ -500,6 +503,14 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
           children: [
             Row(
               children: [
+                     Container(
+                  height: 43,
+                  width: 43,
+                  child: Image(
+                    color: Colors.pink,
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/logot.png"),
+                  )),
                 Shimmer.fromColors(
                   period: Duration(milliseconds: 2000),
                   baseColor: (Colors.grey[100])!,

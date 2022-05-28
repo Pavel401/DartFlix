@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:indiflix/Navigation/Navigation.dart';
 import 'package:indiflix/Screens/DetailsPage/ErrorPage/Error.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,7 +29,7 @@ class DetailsPageBody extends StatefulWidget {
 
 class _DetailsPageBodyState extends State<DetailsPageBody> {
   List moviedetails = [];
-  
+
   launchurl() async {
     String url = "https://www.youtube.com/watch?v=" +
         moviedetails[1]["results"][0]["key"];
@@ -99,7 +99,8 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
   Future<bool> _willPopCallback() async {
     // await showDialog or Show add banners or whatever
     // then
-    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
+Navigator.pop(context);
+      remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
 
     return Future.value(true);
   }
@@ -216,7 +217,7 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                         child: Row(
                                       children: [
                                         const Icon(
-                                          FontAwesome.star,
+                                          Icons.star,
                                           color: Colors.amber,
                                         ),
                                         Container(
@@ -259,7 +260,7 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                                         const EdgeInsets.only(
                                                             bottom: 4, left: 5),
                                                     child: const Icon(
-                                                        AntDesign.play,
+                                                        Icons.play_circle,
                                                         size: 22,
                                                         color: Colors.white)),
                                                 Container(
@@ -279,7 +280,6 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
                                                 )
                                               ],
                                             ))),
-                                    
                                   ],
                                 )),
                           ],

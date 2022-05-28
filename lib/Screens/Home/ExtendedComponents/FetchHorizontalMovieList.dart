@@ -225,12 +225,12 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
     );
     String userdata = jsonEncode(user);
     print("userdata is" + userdata.toString());
-   
+
     movies.add(userdata.toString());
     // print(movies.toString());
     remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
-     for(int i=0;i<remembermovies.length;i++){
-      if(remembermovies[i]==userdata){
+    for (int i = 0; i < remembermovies.length; i++) {
+      if (remembermovies[i] == userdata) {
         return;
       }
     }
@@ -319,18 +319,7 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                               "assets/images/loading.png",
                                           fit: BoxFit.cover,
                                         ))),
-                            Positioned(
-                              bottom: 3,
-                              right: 0,
-                              child: GestureDetector(
-                                  onTap: () {
-                                    //add the ontap method after clicking the three dot menu
-                                  },
-                                  child: const Icon(
-                                    Icons.more_vert,
-                                    color: Colors.white,
-                                  )),
-                            ),
+                           
                           ],
                         )));
               }));

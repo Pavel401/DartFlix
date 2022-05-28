@@ -18,28 +18,30 @@ class _Splash extends State<SplashScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
-//(prefs.getBool('seen') ?? false);
+//(prefs.getBool('seen') ?? false); 
     if (_seen) {
       SplashScreen.saw = _seen;
       _handleStartScreen();
     } else {
       SplashScreen.saw = false;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return IntroductionPage();
-          },
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return IntroductionPage();
+      }),
+      ModalRoute.withName('/intro'),
+    );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Container(
+          child: Center(child: Image.asset( 'assets/images/logo.png')),
+        ),
       ),
     );
   }

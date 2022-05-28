@@ -1,14 +1,20 @@
 // ignore_for_file: unnecessary_const
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/DetailsPage/Components/DetailsPageBody.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
+import 'package:antdesign_icons/antdesign_icons.dart';
+import '../../../../CustomSnackbar/Snackbar.dart';
+import '../../../../Util/GreenSnackbar.dart';
+import '../../../../main.dart';
+import '../../../CustomListFromUserHistory/Model/History.dart';
 
 class Recommendations extends StatefulWidget {
   final id;
@@ -35,10 +41,10 @@ class _RecommendationsState extends State<Recommendations> {
           return AlertDialog(
             backgroundColor: Colors.black,
             content: Container(
-                height: 140,
-                width: 140,
-                child: Center(
-                    child: Column(
+              height: 140,
+              width: 140,
+              child: Center(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
@@ -48,7 +54,7 @@ class _RecommendationsState extends State<Recommendations> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             const Icon(
-                              AntDesign.plussquare,
+                              AntIcons.plusSquareOutlined,
                               color: Colors.red,
                               size: 30,
                             ),
@@ -69,17 +75,21 @@ class _RecommendationsState extends State<Recommendations> {
                       ),
                     ),
                     GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                            child: const Text(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        child: const Text(
                           "CLOSE",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.blue),
-                        )))
+                        ),
+                      ),
+                    ),
                   ],
-                ))),
+                ),
+              ),
+            ),
           );
         });
   }
@@ -124,10 +134,29 @@ class _RecommendationsState extends State<Recommendations> {
     contentbasedrecommendations();
     apibased();
   }
- List<String> movies = [];
+
+  List<String> movies = [];
   void storedata(String name, String url, String id) async {
-   
+    User user = User(
+      name,
+      url,
+      id,
+    );
+    String userdata = jsonEncode(user);
+    print("userdata is" + userdata.toString());
+    // print(name.toUpperCase());
+    movies.add(userdata.toString());
+    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
+    for (int i = 0; i < recommemdedmovies.length; i++) {
+      if (recommemdedmovies[i] == userdata) {
+        return;
+      }
+    }
+    recommemdedmovies.add(userdata.toString());
+    recommemdedmovies.toSet().toList();
+    preferences.setStringList("saverecommendation", recommemdedmovies);
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -149,44 +178,62 @@ class _RecommendationsState extends State<Recommendations> {
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.none)),
             ),
-            InkWell(
-              onTap: () {
-                storedata(
-                    recommend[0]["original_title"].toString(),
-                    "https://image.tmdb.org/t/p/w500" +
-                        recommend[0]["poster_path"].toString(),
-                    recommend[0]["id"].toString());
-              },
-              child: Container(
-                margin: const EdgeInsets.all(5),
-                width: 80.w,
-                height: 4.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: Colors.blueGrey),
-                child: Row(
-                  children: [
-                    Container(
-                        padding: const EdgeInsets.only(bottom: 4, left: 10),
-                        child: const Icon(AntDesign.like1,
-                            size: 22, color: Colors.white)),
-                    Container(
-                      padding:
-                          const EdgeInsets.only(bottom: 4, left: 5, top: 2),
-                      child: const Text(
-                        "Like these recommendations ?",
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+            recommend.isNotEmpty
+                ? InkWell(
+                    onTap: () {
+                      storedata(
+                          recommend[0]["original_title"].toString(),
+                          "https://image.tmdb.org/t/p/w500" +
+                              recommend[0]["poster_path"].toString(),
+                          recommend[0]["id"].toString());
+                      storedata(
+                          recommend[1]["original_title"].toString(),
+                          "https://image.tmdb.org/t/p/w500" +
+                              recommend[1]["poster_path"].toString(),
+                          recommend[1]["id"].toString());
+
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        elevation: 5,
+                        content: GreenSnackbar(
+                          title: "Recommendations are sent to your watchlist",
+                          message: ':)',
+                        ),
+                      ));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      width: 80.w,
+                      height: 4.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Colors.blueGrey),
+                      child: Row(
+                        children: [
+                          Container(
+                              padding:
+                                  const EdgeInsets.only(bottom: 4, left: 10),
+                              child: const Icon(AntIcons.likeOutlined,
+                                  size: 22, color: Colors.white)),
+                          Container(
+                            padding: const EdgeInsets.only(
+                                bottom: 4, left: 5, top: 2),
+                            child: const Text(
+                              "Like these recommendations ?",
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  )
+                : SizedBox(),
+            recommend.isNotEmpty ? getallpopularmoviecards() : SizedBox(),
             getallpopularmoviecard(),
-            getallpopularmoviecards(),
           ],
         ),
       ),
@@ -279,31 +326,7 @@ class _RecommendationsState extends State<Recommendations> {
 
   Widget getallpopularmoviecards() {
     if (popularlist.isEmpty) {
-      return Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: (130.0 / 190.0),
-              ),
-              shrinkWrap: true,
-              itemCount: 12,
-              controller: ScrollController(keepScrollOffset: false),
-              itemBuilder: (BuildContext context, int index) {
-                return Shimmer.fromColors(
-                  period: const Duration(milliseconds: 2000),
-                  baseColor: HexColor("#8970A4"),
-                  direction: ShimmerDirection.ltr,
-                  highlightColor: HexColor("#463567"),
-                  child: Container(
-                    height: 160,
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                        color: (Colors.purple[200])!,
-                        borderRadius: BorderRadius.circular(4.0)),
-                  ),
-                );
-              }));
+      return getlottie();
     } else {
       return Container(
         color: Colors.black,

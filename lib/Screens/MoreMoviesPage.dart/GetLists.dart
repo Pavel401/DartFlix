@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Screens/MoreMoviesPage.dart/Widgets/MovieCard.dart';
 import 'package:shimmer/shimmer.dart';

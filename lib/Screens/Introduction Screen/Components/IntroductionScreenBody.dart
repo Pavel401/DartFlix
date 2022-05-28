@@ -3,6 +3,7 @@ import 'package:indiflix/Navigation/Navigation.dart';
 import 'package:indiflix/Onboarding%20Page/Genere%20selection/GenreSelection.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../../../Ask Name/Askname.dart';
 import '../Model/Model.dart';
 
 class IntroductionScreenBody extends StatefulWidget {
@@ -20,14 +21,13 @@ class _IntroductionScreenBodyState extends State<IntroductionScreenBody> {
       //color: kPrimaryLightColor,
       pages: getPages(),
       onDone: () {
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-            builder: (context) {
-              return GenreSelection();
-            },
-          ),
-        ); // When done button is press
+          MaterialPageRoute(builder: (context) {
+            return ask();
+          }),
+          ModalRoute.withName('/ask'),
+        );
       },
 
       showSkipButton: false,

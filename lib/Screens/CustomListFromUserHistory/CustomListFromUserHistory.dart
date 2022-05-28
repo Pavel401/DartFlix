@@ -142,7 +142,7 @@ class _CustomListFromUserHistoryState extends State<CustomListFromUserHistory> {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: FadeInImage.assetNetwork(
-                                  image: "https://image.tmdb.org/t/p/w500" +
+                                  image: "https://image.tmdb.org/t/p/w500"+
                                       moviedatas[index]["poster_path"]
                                           .toString(),
                                   placeholder: "assets/images/loading.png",

@@ -1,4 +1,4 @@
-package com.example.indiflix
+package com.engage22.DartFlix
 
 import io.flutter.embedding.android.FlutterActivity
 
