@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:indiflix/Ask%20Name/Askname.dart';
 import 'package:indiflix/Onboarding%20Page/Genere%20selection/GenreSelection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart' as sizer;
 import 'package:device_preview/device_preview.dart';
 
+import 'About me/Aboutme.dart';
 import 'Onboarding Page/Language Selection/LanguageSelection.dart';
+import 'Screens/DetailsPage/Components/DetailsPageBody.dart';
+import 'Screens/Introduction Screen/IntroductionScreen.dart';
 import 'Splash/SplashScreen.dart';
 
 late SharedPreferences preferences;
 List persistedGenres = [];
 List persistedLanguages = [];
-List <String>remembermovies = [];
-List <String>remembermoviesurl = [];
-List <String>recommemdedmovies = [];
+List<String> remembermovies = [];
+List<String> remembermoviesurl = [];
+List<String> recommemdedmovies = [];
+String username="";
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,9 +50,11 @@ class _MyAppState extends State<MyApp> {
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
     remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
-        recommemdedmovies = preferences.getStringList('savedrecommendation') ?? [];
+    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
+     recommemdedmovies= recommemdedmovies.reversed.toList();
+  remembermovies= remembermovies.reversed.toList();
 
-
+  username=preferences.getString('keyusername')??"";
   }
 
   // This widget is the root of your application.
@@ -60,6 +67,12 @@ class _MyAppState extends State<MyApp> {
           '/GenreSelection': (context) => GenreSelection(),
           '/LanguageSelection': (context) => BuildLanguageSelection(),
           '/Splash': (context) => SplashScreen(),
+          '/details': (context) => DetailsPageBody(),
+                    '/intro': (context) => IntroductionPage(),
+                    '/ask': (context) => ask(),
+                                        '/settings': (context) => Aboutme(),
+
+
         },
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
