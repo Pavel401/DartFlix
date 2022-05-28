@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -8,6 +10,8 @@ import 'package:sizer/sizer.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import '../../main.dart';
+import '../CustomListFromUserHistory/Model/History.dart';
 import '../DetailsPage/Components/DetailsPageBody.dart';
 import 'Model/data.dart';
 import 'components/CustomAlert.dart';
@@ -62,7 +66,27 @@ class _SwipableCardsState extends State<SwipableCards> {
       ratings.add(val[i]["vote_average"].toString());
     }
   }
-
+List<String> movies = [];
+  void storedata(String name, String url, String id) async {
+    User user = User(
+      name,
+      url,
+      id,
+    );
+    String userdata = jsonEncode(user);
+    print("userdata is" + userdata.toString());
+    // print(name.toUpperCase());
+    movies.add(userdata.toString());
+    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
+    for (int i = 0; i < recommemdedmovies.length; i++) {
+      if (recommemdedmovies[i] == userdata) {
+        return;
+      }
+    }
+    recommemdedmovies.add(userdata.toString());
+    recommemdedmovies.toSet().toList();
+    preferences.setStringList("saverecommendation", recommemdedmovies);
+  }
   void create_cards() {
     for (int i = 0; i < names.length; i++) {
       _swipeItems.add(
@@ -73,6 +97,11 @@ class _SwipableCardsState extends State<SwipableCards> {
               year: releaseyear[i],
               url: images[i]),
           likeAction: () {
+             storedata(
+                          names[i].toString(),
+                          "https://image.tmdb.org/t/p/original" +
+                                                  images[i].toString(),
+                          ratings[i].toString());
             actions(context, names[i], 'Liked');
           },
           nopeAction: () {
@@ -106,7 +135,7 @@ class _SwipableCardsState extends State<SwipableCards> {
                       children: [
                         Container(
                           color: Colors.transparent,
-                          height: 75.h,
+                          height: 73.h,
                           width: 90.w,
                           child: SwipeCards(
                             matchEngine: _matchEngine!,
