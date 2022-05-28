@@ -13,7 +13,6 @@ class MyHomePage extends StatefulWidget {
     Page('Home', Icons.home, 30),
     Page('search', Icons.search, 30),
     Page('Suggest', Icons.assistant, 30),
-    Page('library', Icons.playlist_play_sharp, 35),
     Page('Profile', Icons.person_outline, 30),
   ];
 
@@ -48,7 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
       Home(),
       Search(),
       SwipableCards(),
-      Watchlistbar(),
       Profile(),
     ];
     return Scaffold(
@@ -60,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Home(),
             Search(),
             SwipableCards(),
-            Watchlistbar(),
+          
             Profile(),
           ],
         ),
