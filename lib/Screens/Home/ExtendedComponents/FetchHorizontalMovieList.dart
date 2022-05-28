@@ -319,7 +319,6 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                               "assets/images/loading.png",
                                           fit: BoxFit.cover,
                                         ))),
-                           
                           ],
                         )));
               }));

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -6,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import '../../../main.dart';
+import '../../CustomListFromUserHistory/Model/History.dart';
 import '../../DetailsPage/Components/DetailsPageBody.dart';
 
 class SearchQuery extends StatefulWidget {
@@ -68,65 +71,106 @@ class _SearchQueryState extends State<SearchQuery> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          title: Container(
-            alignment: Alignment.center,
-            color: HexColor("#272727"),
-            child: TextField(
-              cursorColor: Colors.white,
-              onChanged: (text) {
-                setState(() {
-                  query = text;
-                  try {
-                    getresponse().then((value) => {
-                          if (value == null)
-                            {}
-                          else
-                            {
-                              if (mounted)
+    return WillPopScope(
+        child: Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Colors.black,
+              title: Container(
+                alignment: Alignment.center,
+                color: HexColor("#272727"),
+                child: TextField(
+                  cursorColor: Colors.white,
+                  onChanged: (text) {
+                    setState(() {
+                      query = text;
+                      try {
+                        getresponse().then((value) => {
+                              if (value == null)
+                                {}
+                              else
                                 {
-                                  setState(() {
-                                    search_result = value["results"];
-                                  })
+                                  if (mounted)
+                                    {
+                                      setState(() {
+                                        search_result = value["results"];
+                                      })
+                                    }
                                 }
-                            }
-                        });
-                  } catch (e) {}
-                });
-              },
-              style: TextStyle(color: Colors.white, fontSize: 15),
-              decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: HexColor("#7220C9"),
-                  ),
-                  // suffixIconColor: HexColor("#7220C9"),
-                  filled: true,
-                  fillColor: HexColor("#272727"),
-                  border: InputBorder.none,
-                  focusColor: Colors.white,
-                  hoverColor: Colors.white,
-                  labelStyle: TextStyle(color: Colors.white),
-                  hintStyle: TextStyle(color: Colors.white),
-                  hintText: 'Search for a movie or genre'),
+                            });
+                      } catch (e) {}
+                    });
+                  },
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  decoration: InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: HexColor("#7220C9"),
+                      ),
+                      // suffixIconColor: HexColor("#7220C9"),
+                      filled: true,
+                      fillColor: HexColor("#272727"),
+                      border: InputBorder.none,
+                      focusColor: Colors.white,
+                      hoverColor: Colors.white,
+                      labelStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white),
+                      hintText: 'Search for a movie or genre'),
+                ),
+              ),
+              leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
             ),
-          ),
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 25,
-            ),
-          ),
-        ),
-        body: getname());
+            body: getname()),
+        onWillPop: _willPopCallback);
+  }
+
+  Future<bool> _willPopCallback() async {
+    // await showDialog or Show add banners or whatever
+    // then
+
+    storedata(
+        search_result[0]["original_title"].toString(),
+        "https://image.tmdb.org/t/p/w500" +
+            search_result[0]["poster_path"].toString(),
+        search_result[0]["original_title"].toString());
+
+    Navigator.pop(context);
+    searchdata = preferences.getStringList('searchdatas') ?? [];
+
+    return Future.value(true);
+  }
+
+  List<String> movies = [];
+  void storedata(String name, String url, String id) async {
+    User user = User(
+      name,
+      url,
+      id,
+    );
+    String userdata = jsonEncode(user);
+    print("userdata is" + userdata.toString());
+
+    movies.add(userdata.toString());
+    // print(movies.toString());
+    searchdata = preferences.getStringList('searchdatas') ?? [];
+    for (int i = 0; i < searchdata.length; i++) {
+      if (searchdata[i] == userdata) {
+        return;
+      }
+    }
+    searchdata.add(userdata.toString());
+    searchdata.toSet().toList();
+    preferences.setStringList("searchdatas", searchdata);
   }
 
   Widget getname() {
@@ -185,7 +229,8 @@ class _SearchQueryState extends State<SearchQuery> {
                                 borderRadius: BorderRadius.circular(4),
                                 child: Image(
                                     fit: BoxFit.cover,
-                                    image: AssetImage('assets/images/loading.png')))
+                                    image: AssetImage(
+                                        'assets/images/loading.png')))
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(4),
                                 child: FadeInImage.assetNetwork(

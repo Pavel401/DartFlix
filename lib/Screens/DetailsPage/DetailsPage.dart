@@ -4,7 +4,7 @@ import 'Components/DetailsPageBody.dart';
 
 
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatelessWidget  {
   const DetailsPage({ Key? key }) : super(key: key);
 
   @override

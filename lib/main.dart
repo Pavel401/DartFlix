@@ -18,7 +18,8 @@ List persistedLanguages = [];
 List<String> remembermovies = [];
 List<String> remembermoviesurl = [];
 List<String> recommemdedmovies = [];
-String username="";
+List<String> searchdata = [];
+String username = "";
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,10 +52,13 @@ class _MyAppState extends State<MyApp> {
     persistedLanguages = preferences.getStringList('_language') ?? [];
     remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
     recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
-     recommemdedmovies= recommemdedmovies.reversed.toList();
-  remembermovies= remembermovies.reversed.toList();
+    searchdata = preferences.getStringList('searchdatas') ?? [];
 
-  username=preferences.getString('keyusername')??"";
+    recommemdedmovies = recommemdedmovies.reversed.toList();
+    remembermovies = remembermovies.reversed.toList();
+    searchdata = searchdata.reversed.toList();
+
+    username = preferences.getString('keyusername') ?? "";
   }
 
   // This widget is the root of your application.
@@ -68,11 +72,9 @@ class _MyAppState extends State<MyApp> {
           '/LanguageSelection': (context) => BuildLanguageSelection(),
           '/Splash': (context) => SplashScreen(),
           '/details': (context) => DetailsPageBody(),
-                    '/intro': (context) => IntroductionPage(),
-                    '/ask': (context) => ask(),
-                                        '/settings': (context) => Aboutme(),
-
-
+          '/intro': (context) => IntroductionPage(),
+          '/ask': (context) => ask(),
+          '/settings': (context) => Aboutme(),
         },
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
