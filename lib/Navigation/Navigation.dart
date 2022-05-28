@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:indiflix/Profile/Profile.dart';
 import 'package:indiflix/Screens/Home/HomePage.dart';
@@ -29,6 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentPageIndex = 0;
 
   void _openPage(int index) {
+    var _type = FeedbackType.selection;
+            Vibrate.feedback(_type);
     setState(() {
       _currentPageIndex = index;
     });
