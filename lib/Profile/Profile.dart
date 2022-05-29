@@ -65,7 +65,7 @@ dynamicChips() {
                     FilterChipDisplay.filters.length, (int index) {
                   return Chip(
                     label: Text(
-                      persistedGenres[index],
+                     FilterChipDisplay.filters[index],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -129,7 +129,7 @@ dynamicChips2() {
                     LanguageSelection.languages.length, (int index) {
                   return Chip(
                     label: Text(
-                      persistedLanguages[index],
+                      LanguageSelection.languages[index],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
