@@ -182,6 +182,8 @@ download these two datasets and put it in the recommendation api folder.
 | :-------- | :------- | :------------------------- |
 | `moviename` | `string` | **Required**. Movie name (ex-Avatar) |
 
+  Takes movie name and returns movie details as  json.
+ 
 #### Get Recommendations
 
 ```http
@@ -193,7 +195,7 @@ download these two datasets and put it in the recommendation api folder.
 | :-------- | :------- | :-------------------------------- |
 | `moviename`      | `string` | **Required**. Moviename (ex-Avatar)|
 
-#### add(num1, num2)
 
-Takes two numbers and returns the sum.
+
+Takes movie name and returns movie Recommendations based on cosine values.
 
