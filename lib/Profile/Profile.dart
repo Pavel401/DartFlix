@@ -159,12 +159,11 @@ class _ProfileState extends State<Profile> {
     // TODO: implement initState
     super.initState();
 
-    print("searched movies" + searchdata.toString());
+    //print("searched movies" + searchdata.toString());
 
     init();
 
     Timer.periodic(Duration(seconds: 5), (timer) {
-     
       init();
       setState(() {});
     });
@@ -177,8 +176,11 @@ class _ProfileState extends State<Profile> {
     timer.cancel();
     super.dispose();
   }
- 
+
   static Future init() async {
+    preferences = await SharedPreferences.getInstance();
+
+    username = preferences.getString('keyusername') ?? "";
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
     preferences = await SharedPreferences.getInstance();
@@ -194,10 +196,9 @@ class _ProfileState extends State<Profile> {
     searchdata = searchdata.reversed.toList();
     images = preferences.getStringList('posters') ?? [];
     title = preferences.getStringList('movienames') ?? [];
-     images = images.reversed.toList();
+    images = images.reversed.toList();
     title = title.reversed.toList();
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import '../../Util/hidekeyboard.dart';
 import '../../main.dart';
 import '../CustomListFromUserHistory/Model/History.dart';
 import '../DetailsPage/Components/DetailsPageBody.dart';
@@ -47,6 +48,7 @@ class _SwipableCardsState extends State<SwipableCards> {
   @override
   void initState() {
     super.initState();
+    hideKeyboard(context);
     this.getrandom();
 
     //print(names.toList());
@@ -80,6 +82,7 @@ class _SwipableCardsState extends State<SwipableCards> {
         return;
       }
     }
+    
     recommemdedmovieimages.add(url.toString());
     recommemdedmovieimages.toSet().toList();
     preferences.setStringList("recommemdedmovieimages", recommemdedmovieimages);
@@ -107,13 +110,18 @@ class _SwipableCardsState extends State<SwipableCards> {
               year: releaseyear[i],
               url: images[i]),
           likeAction: () {
+                hideKeyboard(context);
+
             storedata(
                 names[i].toString(),
                 "https://image.tmdb.org/t/p/original" + images[i].toString(),
                 ratings[i].toString());
             actions(context, names[i], 'Liked');
+
           },
           nopeAction: () {
+                hideKeyboard(context);
+
             actions(context, names[i], 'Rejected');
           },
         ),
