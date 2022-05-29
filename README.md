@@ -134,33 +134,33 @@ Movie Overview Page            |   Cast List Page
 
 
 
-## Architecture :
-<p align="center">
-  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653685709/Blank_diagram_1.png" alt="demo"/>
-</p>
 
-## Cosine Similarity used here :
-  Cosine similarity is a metric used to measure how similar the documents are irrespective of their size. Mathematically, it measures the cosine of the angle between two vectors projected in a multi-dimensional space. The cosine similarity is advantageous because even if the two similar documents are far apart by the Euclidean distance (due to the size of the document), chances are they may still be oriented closer together. The smaller the angle, higher the cosine similarity.
-  
-<p align="center">
-  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653718616/1_IhpY-6LYV75983THCpWo-w.png" alt="demo"/>
-</p>
-
-  
 ## Machine learning model used:
 
 I have incorporated machine learning models like a bag of words, tf - idf vectorization, similarity analysis, and review analysis based on multinomial naïve bays algorithm. Which is a Bayesian learning approach popular in Natural Language Processing (NLP).
+  
+
 
  ## Similarity Score : 
 
    How does it decide which item is most similar to the item user likes? Here come the similarity scores.
    
    It is a numerical value rangesthat  between zero to one which helps to determine how much two items are similar to each other on a scale of zero to one. This similarity score is obtained measuring the similarity between the text details of both of the items. So, similarity score is the measure of similarity between given text details of two items. This can be done by cosine-similarity.
-  
+  ![cosine_similarity](https://user-images.githubusercontent.com/47685150/170878468-6f9f87a7-393b-48ab-a4fb-e1dd5b47bcb3.png)
+
  
 - And once again we can see that all details for that clicked movie comes as that of previous searched movie .
 -  It provides a cool suggest movie feature with nice swipable card.
 
+  ## Naive Bayes : 
+
+  Naive Bayes is a fairly simple group of probabilistic algorithms that, for sentiment analysis classification, assigns a probability that a given word or phrase should be considered positive or negative.
+Essentially, this is how Bayes’ theorem works. The probability of A, if B is true, is equal to the probability of B, if A is true, times the probability of A being true, divided by the probability of B being true: 
+  ![1_e90_bvVf9Agxfk4DxWu7og](https://user-images.githubusercontent.com/47685150/170878386-6e408c51-d9f3-480d-8ada-4f065f90fbb1.jpeg)
+  But that’s a lot of math! Basically, Naive Bayes calculates words against each other. So, with machine learning models trained for word polarity, we can calculate the likelihood that a word, phrase, or text is positive or negative.
+
+When techniques like lemmatization, stopword removal, and TF-IDF are implemented, Naive Bayes becomes more and more predictively accurate.
+  
 ## Note : 
 
 Datasets of credits.csv and movies_metadata.csv download from [here](https://www.kaggle.com/rounakbanik/the-movies-dataset)
