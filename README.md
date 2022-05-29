@@ -38,9 +38,9 @@
   
   
  
-> Take a look at the presentation [Here](https://drive.google.com/file/d/1iRYu371qu8338wkqMpL65NdTyt4VCVAL/view?usp=sharing
+> Take a look at the presentation [Here](https://drive.google.com/file/d/11au8ETgKUJ8KxVM09LsH4VLWeWHHJx0K/view?usp=sharing
 )<br>
- > My [Software write up during the Microsoft Engage Program](https://drive.google.com/file/d/11sCm9MFrsnFHygHmQC7XK-LU7sgBU44D/view?usp=sharing)
+ > My [Software write up during the Microsoft Engage Program](https://drive.google.com/file/d/11au8ETgKUJ8KxVM09LsH4VLWeWHHJx0K/view?usp=sharing)
 
  
  ## Features :
@@ -66,7 +66,7 @@ Install DartFlix apk
 ```bash
  I have already compiled the apk and attached the download link.
 ```
-![Download APK  - from Here](https://img.shields.io/badge/Download_APK_-from_Here-7220C9)
+[![Download Apk - Click Here](https://img.shields.io/badge/Download_Apk-Click_Here-2ea44f)](https://drive.google.com/uc?id=1_-jhXwut3gYcALAgsyl4f6Wkj-QMV_gE&export=download)
 
 ## Run Locally
 Flutter SDK
@@ -101,37 +101,103 @@ Debug the app
 ```bash
  flutter run 
 ```
-
-
-## Architecture :
-<p align="center">
-  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653685709/Blank_diagram_1.png" alt="demo"/>
-</p>
-
-## Cosine Similarity used here :
-  Cosine similarity is a metric used to measure how similar the documents are irrespective of their size. Mathematically, it measures the cosine of the angle between two vectors projected in a multi-dimensional space. The cosine similarity is advantageous because even if the two similar documents are far apart by the Euclidean distance (due to the size of the document), chances are they may still be oriented closer together. The smaller the angle, higher the cosine similarity.
   
-<p align="center">
-  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653718616/1_IhpY-6LYV75983THCpWo-w.png" alt="demo"/>
-</p>
-
+## Output Screenshots
+Recommendations Page            |  Sentiment Analysis Page
+:-------------------------:|:-------------------------:
+![tia5569436775523766645](https://user-images.githubusercontent.com/47685150/170873184-6e1dd495-e8c9-445a-b4a0-239af18fdeee.png)|![tia8858542068622280607](https://user-images.githubusercontent.com/47685150/170873198-282dcac1-d866-4fcf-8cc6-70a810498104.png)
   
+Movie Overview Page            |   Cast List Page
+:-------------------------:|:-------------------------:
+![tia5569436775523766645 (1)](https://user-images.githubusercontent.com/47685150/170873801-1c72fce5-7a40-4aae-892a-b286c028ab98.png)|![tia6276718872008158942](https://user-images.githubusercontent.com/47685150/170873849-f16b8e54-2264-4082-b624-9458eafb21e7.png)
+
+ More Movies of a Cast            |   Top Movies
+:-------------------------:|:-------------------------:
+![tia2767914410413613655](https://user-images.githubusercontent.com/47685150/170873917-e294d51b-dfb2-46d3-ab16-5e5b05f57da6.png)|![Screenshot_20220529-185934](https://user-images.githubusercontent.com/47685150/170873997-5e20bbc0-3aac-48d5-ad0b-02e36b0a78c0.jpg)
+
+ Genre Wise Search Page            |   Search Result Page
+:-------------------------:|:-------------------------:
+![tia4793552705933106791](https://user-images.githubusercontent.com/47685150/170874098-49c90c64-a527-4ce8-b1f1-4122d880dabf.png)|![tia8104170913011518750](https://user-images.githubusercontent.com/47685150/170874128-4fc11c9e-aa10-4569-ba0b-c084e0f536ca.png)
+  
+ Swipable UI            |   Confirmation Dialog
+:-------------------------:|:-------------------------:
+![tia6145994717417066643](https://user-images.githubusercontent.com/47685150/170874277-b3cf85c7-dea2-4762-bc18-d9d23b92bead.png)|![tia8111643190604640115](https://user-images.githubusercontent.com/47685150/170874442-5e5bcf26-4d82-4359-b262-53e93bfd4c69.png)
+  
+ HomePage            |   Collaborative Recommendations
+:-------------------------:|:-------------------------:
+![tia993728855442297670](https://user-images.githubusercontent.com/47685150/170874735-d8a5cd8d-2794-481d-93ba-fe27c40403d2.png)|![tia93710582430609766](https://user-images.githubusercontent.com/47685150/170874706-fa3e4b9c-8470-49df-b156-4d5f8c5d4837.png)
+
+ Profile Page            |   About & Contact Page
+:-------------------------:|:-------------------------:
+![tia5300446429116516377](https://user-images.githubusercontent.com/47685150/170874824-2e2dcd52-f0f6-4cde-91bf-a8871d28d19d.png)|![tia76456325585923122](https://user-images.githubusercontent.com/47685150/170874835-f1f1bc37-8576-437c-b99b-fd1a34afd7d4.png)
+
+
+
+
+
 ## Machine learning model used:
 
 I have incorporated machine learning models like a bag of words, tf - idf vectorization, similarity analysis, and review analysis based on multinomial naïve bays algorithm. Which is a Bayesian learning approach popular in Natural Language Processing (NLP).
+  ## Architecture :
+
+![Blank diagram (1)](https://user-images.githubusercontent.com/47685150/170880263-1500966b-b94b-4043-a4c8-82ed1411cf93.png)
+
 
  ## Similarity Score : 
 
    How does it decide which item is most similar to the item user likes? Here come the similarity scores.
    
    It is a numerical value rangesthat  between zero to one which helps to determine how much two items are similar to each other on a scale of zero to one. This similarity score is obtained measuring the similarity between the text details of both of the items. So, similarity score is the measure of similarity between given text details of two items. This can be done by cosine-similarity.
-  
+  ![cosine_similarity](https://user-images.githubusercontent.com/47685150/170878468-6f9f87a7-393b-48ab-a4fb-e1dd5b47bcb3.png)
+
  
 - And once again we can see that all details for that clicked movie comes as that of previous searched movie .
 -  It provides a cool suggest movie feature with nice swipable card.
 
+  ## Naive Bayes : 
+
+  Naive Bayes is a fairly simple group of probabilistic algorithms that, for sentiment analysis classification, assigns a probability that a given word or phrase should be considered positive or negative.
+Essentially, this is how Bayes’ theorem works. The probability of A, if B is true, is equal to the probability of B, if A is true, times the probability of A being true, divided by the probability of B being true: 
+  ![1_e90_bvVf9Agxfk4DxWu7og](https://user-images.githubusercontent.com/47685150/170878386-6e408c51-d9f3-480d-8ada-4f065f90fbb1.jpeg)
+  But that’s a lot of math! Basically, Naive Bayes calculates words against each other. So, with machine learning models trained for word polarity, we can calculate the likelihood that a word, phrase, or text is positive or negative.
+
+When techniques like lemmatization, stopword removal, and TF-IDF are implemented, Naive Bayes becomes more and more predictively accurate.
+  
 ## Note : 
 
 Datasets of credits.csv and movies_metadata.csv download from [here](https://www.kaggle.com/rounakbanik/the-movies-dataset)
 download these two datasets and put it in the recommendation api folder.
   
+
+
+
+## API Reference
+
+#### Get MOVIE DETAILS
+
+```http
+  GET /getmovie/moviename
+  (ex - https://enage22.herokuapp.com/getmovie/Avatar)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `moviename` | `string` | **Required**. Movie name (ex-Avatar) |
+
+  Takes movie name and returns movie details as  json.
+ 
+#### Get Recommendations
+
+```http
+  GET /send/moviename
+  (ex- https://enage22.herokuapp.com/send/Avatar)
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `moviename`      | `string` | **Required**. Moviename (ex-Avatar)|
+
+
+
+Takes movie name and returns movie Recommendations based on cosine values.
+
