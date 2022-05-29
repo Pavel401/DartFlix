@@ -101,6 +101,37 @@ Debug the app
 ```bash
  flutter run 
 ```
+  
+## Output Screenshots
+Recommendations Page            |  Sentiment Analysis Page
+:-------------------------:|:-------------------------:
+![tia5569436775523766645](https://user-images.githubusercontent.com/47685150/170873184-6e1dd495-e8c9-445a-b4a0-239af18fdeee.png)|![tia8858542068622280607](https://user-images.githubusercontent.com/47685150/170873198-282dcac1-d866-4fcf-8cc6-70a810498104.png)
+  
+Movie Overview Page            |   Cast List Page
+:-------------------------:|:-------------------------:
+![tia5569436775523766645 (1)](https://user-images.githubusercontent.com/47685150/170873801-1c72fce5-7a40-4aae-892a-b286c028ab98.png)|![tia6276718872008158942](https://user-images.githubusercontent.com/47685150/170873849-f16b8e54-2264-4082-b624-9458eafb21e7.png)
+
+ More Movies of a Cast            |   Top Movies
+:-------------------------:|:-------------------------:
+![tia2767914410413613655](https://user-images.githubusercontent.com/47685150/170873917-e294d51b-dfb2-46d3-ab16-5e5b05f57da6.png)|![Screenshot_20220529-185934](https://user-images.githubusercontent.com/47685150/170873997-5e20bbc0-3aac-48d5-ad0b-02e36b0a78c0.jpg)
+
+ Genre Wise Search Page            |   Search Result Page
+:-------------------------:|:-------------------------:
+![tia4793552705933106791](https://user-images.githubusercontent.com/47685150/170874098-49c90c64-a527-4ce8-b1f1-4122d880dabf.png)|![tia8104170913011518750](https://user-images.githubusercontent.com/47685150/170874128-4fc11c9e-aa10-4569-ba0b-c084e0f536ca.png)
+  
+ Swipable UI            |   Confirmation Dialog
+:-------------------------:|:-------------------------:
+![tia6145994717417066643](https://user-images.githubusercontent.com/47685150/170874277-b3cf85c7-dea2-4762-bc18-d9d23b92bead.png)|![tia8111643190604640115](https://user-images.githubusercontent.com/47685150/170874442-5e5bcf26-4d82-4359-b262-53e93bfd4c69.png)
+  
+ HomePage            |   Collaborative Recommendations
+:-------------------------:|:-------------------------:
+![tia993728855442297670](https://user-images.githubusercontent.com/47685150/170874735-d8a5cd8d-2794-481d-93ba-fe27c40403d2.png)|![tia93710582430609766](https://user-images.githubusercontent.com/47685150/170874706-fa3e4b9c-8470-49df-b156-4d5f8c5d4837.png)
+
+ Profile Page            |   About & Contact Page
+:-------------------------:|:-------------------------:
+![tia5300446429116516377](https://user-images.githubusercontent.com/47685150/170874824-2e2dcd52-f0f6-4cde-91bf-a8871d28d19d.png)|![tia76456325585923122](https://user-images.githubusercontent.com/47685150/170874835-f1f1bc37-8576-437c-b99b-fd1a34afd7d4.png)
+
+
 
 
 ## Architecture :
@@ -135,37 +166,6 @@ I have incorporated machine learning models like a bag of words, tf - idf vector
 Datasets of credits.csv and movies_metadata.csv download from [here](https://www.kaggle.com/rounakbanik/the-movies-dataset)
 download these two datasets and put it in the recommendation api folder.
   
-  
-## Output Screenshots
-Recommendations Page            |  Sentiment Analysis Page
-:-------------------------:|:-------------------------:
-![tia5569436775523766645](https://user-images.githubusercontent.com/47685150/170873184-6e1dd495-e8c9-445a-b4a0-239af18fdeee.png)|![tia8858542068622280607](https://user-images.githubusercontent.com/47685150/170873198-282dcac1-d866-4fcf-8cc6-70a810498104.png)
-  
-Movie Overview Page            |   Cast List Page
-:-------------------------:|:-------------------------:
-![tia5569436775523766645 (1)](https://user-images.githubusercontent.com/47685150/170873801-1c72fce5-7a40-4aae-892a-b286c028ab98.png)|![tia6276718872008158942](https://user-images.githubusercontent.com/47685150/170873849-f16b8e54-2264-4082-b624-9458eafb21e7.png)
-
- More Movies of a Cast            |   Top Movies
-:-------------------------:|:-------------------------:
-![tia2767914410413613655](https://user-images.githubusercontent.com/47685150/170873917-e294d51b-dfb2-46d3-ab16-5e5b05f57da6.png)|![Screenshot_20220529-185934](https://user-images.githubusercontent.com/47685150/170873997-5e20bbc0-3aac-48d5-ad0b-02e36b0a78c0.jpg)
-
- Genre Wise Search Page            |   Search Result Page
-:-------------------------:|:-------------------------:
-![tia4793552705933106791](https://user-images.githubusercontent.com/47685150/170874098-49c90c64-a527-4ce8-b1f1-4122d880dabf.png)|![tia8104170913011518750](https://user-images.githubusercontent.com/47685150/170874128-4fc11c9e-aa10-4569-ba0b-c084e0f536ca.png)
-  
- Swipable UI            |   Confirmation Dialog
-:-------------------------:|:-------------------------:
-![tia6145994717417066643](https://user-images.githubusercontent.com/47685150/170874277-b3cf85c7-dea2-4762-bc18-d9d23b92bead.png)|![tia8111643190604640115](https://user-images.githubusercontent.com/47685150/170874442-5e5bcf26-4d82-4359-b262-53e93bfd4c69.png)
-  
- HomePage            |   Collaborative Recommendations
-:-------------------------:|:-------------------------:
-![tia993728855442297670](https://user-images.githubusercontent.com/47685150/170874735-d8a5cd8d-2794-481d-93ba-fe27c40403d2.png)|![tia93710582430609766](https://user-images.githubusercontent.com/47685150/170874706-fa3e4b9c-8470-49df-b156-4d5f8c5d4837.png)
-
- Profile Page            |   About & Contact Page
-:-------------------------:|:-------------------------:
-![tia5300446429116516377](https://user-images.githubusercontent.com/47685150/170874824-2e2dcd52-f0f6-4cde-91bf-a8871d28d19d.png)|![tia76456325585923122](https://user-images.githubusercontent.com/47685150/170874835-f1f1bc37-8576-437c-b99b-fd1a34afd7d4.png)
-
-
 
 
 
