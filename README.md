@@ -64,7 +64,7 @@
 Install DartFlix apk
 
 ```bash
- I have already compiled the apk and attached the download link.
+ I have already compiled the apk and attached the download link.Just install it and you are good to go.
 ```
 [![Download Apk - Click Here](https://img.shields.io/badge/Download_Apk-Click_Here-2ea44f)](https://drive.google.com/uc?id=1_-jhXwut3gYcALAgsyl4f6Wkj-QMV_gE&export=download)
 
