@@ -39,6 +39,10 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
 
     //print("Remember movies" + remembermovies.toString());
     print("searched movies" + searchdata.toString());
+    
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+        init();
+    });
 
     init();
     // print("Persistent Genre" + persistedGenres.toList().toString());
@@ -47,7 +51,7 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
 
     //  print(LanguageSelection.languages.toList());
     Timer.periodic(Duration(seconds: 5), (timer) {
-      init();
+    
       setState(() {});
     });
     super.initState();

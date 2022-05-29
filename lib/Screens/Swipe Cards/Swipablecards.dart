@@ -48,7 +48,6 @@ class _SwipableCardsState extends State<SwipableCards> {
   @override
   void initState() {
     super.initState();
-    hideKeyboard(context);
     this.getrandom();
 
     //print(names.toList());

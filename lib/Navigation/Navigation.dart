@@ -39,9 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initState() {
     super.initState();
-    setState(() {
+    Future(() {
+  // Call your function
+  WidgetsBinding.instance!.addPostFrameCallback((_) async {
+       setState(() {
       _currentPageIndex = 0;
     });
+    });
+  
+});
+    
   }
 
   @override

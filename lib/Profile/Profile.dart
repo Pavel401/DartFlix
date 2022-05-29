@@ -163,11 +163,12 @@ class _ProfileState extends State<Profile> {
 
     init();
 
-    Timer.periodic(Duration(seconds: 5), (timer) {
+    Timer.periodic(Duration(seconds: 8), (timer) {
       init();
       setState(() {});
     });
-    super.initState();
+       super.initState();
+
     // int count=FilterChipDisplay
   }
 
@@ -179,7 +180,6 @@ class _ProfileState extends State<Profile> {
 
   static Future init() async {
     preferences = await SharedPreferences.getInstance();
-
     username = preferences.getString('keyusername') ?? "";
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
