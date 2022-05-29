@@ -46,7 +46,6 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
     //  print("Persistent languge" + persistedLanguages.toList().toString());
 
     //  print(LanguageSelection.languages.toList());
-    print("Remember movies" + recommemdedmovies.toString());
     Timer.periodic(Duration(seconds: 5), (timer) {
       init();
       setState(() {});
@@ -63,15 +62,27 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
 
   static Future init() async {
     preferences = await SharedPreferences.getInstance();
-    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
-    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
-    recommemdedmovies = recommemdedmovies.reversed.toList();
-    remembermovies = remembermovies.reversed.toList();
-    searchdata = preferences.getStringList('searchdatas') ?? [];
-    searchdata = searchdata.reversed.toList();
-
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
+    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
+    recommemdedmovieimages =
+        preferences.getStringList('recommemdedmovieimages') ?? [];
+    recommemdedmovienames =
+        preferences.getStringList('recommemdedmovietitles') ?? [];
+
+    searchdata = preferences.getStringList('searchdatas') ?? [];
+
+    recommemdedmovieimages = recommemdedmovieimages.reversed.toList();
+    recommemdedmovienames = recommemdedmovienames.reversed.toList();
+
+    remembermovies = remembermovies.reversed.toList();
+    searchdata = searchdata.reversed.toList();
+    images = preferences.getStringList('posters') ?? [];
+    title = preferences.getStringList('movienames') ?? [];
+    images = images.reversed.toList();
+    title = title.reversed.toList();
+
+    username = preferences.getString('keyusername') ?? "";
   }
 
   Map<String, int> genres_ids = {
@@ -107,6 +118,150 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
     'Punjabi': "pa",
     'Oriya': "or",
   };
+  Widget buildRecommend() {
+    if (recommemdedmovieimages.isEmpty) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 20,
+          itemBuilder: (BuildContext context, int index) {
+            return Shimmer.fromColors(
+              period: const Duration(milliseconds: 2000),
+              baseColor: HexColor("#8970A4"),
+              direction: ShimmerDirection.ltr,
+              highlightColor: HexColor("#463567"),
+              child: Container(
+                width: 118,
+                margin: const EdgeInsets.all(6.0),
+                decoration: BoxDecoration(
+                    color: (Colors.purple[200])!,
+                    borderRadius: BorderRadius.circular(4.0)),
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        width: MediaQuery.of(context).size.width,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: recommemdedmovieimages.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsPageBody(
+                            moviename:
+                                recommemdedmovienames[index].toString())));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 10.h,
+                  width: 35.w,
+                  child: recommemdedmovieimages.toString().isEmpty
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: const Image(
+                            image: AssetImage("assets/images/loading.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: FadeInImage.assetNetwork(
+                            image: recommemdedmovieimages[index].toString(),
+                            placeholder: "assets/images/loading.png",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
+
+  Widget watchlist() {
+    if (images.isEmpty) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 20,
+          itemBuilder: (BuildContext context, int index) {
+            return Shimmer.fromColors(
+              period: const Duration(milliseconds: 2000),
+              baseColor: HexColor("#8970A4"),
+              direction: ShimmerDirection.ltr,
+              highlightColor: HexColor("#463567"),
+              child: Container(
+                width: 118,
+                margin: const EdgeInsets.all(6.0),
+                decoration: BoxDecoration(
+                    color: (Colors.purple[200])!,
+                    borderRadius: BorderRadius.circular(4.0)),
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        width: MediaQuery.of(context).size.width,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: images.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsPageBody(
+                            moviename: title[index].toString())));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 10.h,
+                  width: 35.w,
+                  child: images.toString().isEmpty
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: const Image(
+                            image: AssetImage("assets/images/loading.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: FadeInImage.assetNetwork(
+                            image: images[index].toString(),
+                            placeholder: "assets/images/loading.png",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,253 +280,16 @@ class _CollaborativeHomePageState extends State<CollaborativeHomePage> {
           SizedBox(
             height: 4.h,
           ),
+          recommemdedmovieimages.isEmpty
+              ? SizedBox()
+              : TopShimmerWithoutURL("Recommended Movies for you"),
+          recommemdedmovieimages.isEmpty ? SizedBox() : buildRecommend(),
+          images.isEmpty ? SizedBox() : TopShimmerWithoutURL("Watchlist"),
+          images.isEmpty ? SizedBox() : watchlist(),
           getlatest(
               "Top Rated",
               "https://api.themoviedb.org/3/movie/top_rated?api_key=ebe86eb4e04342d7598d4096a16d8d11&language=en-US&page=2",
               ""),
-          remembermovies.isNotEmpty
-              ? Container(
-                  child: Column(
-                    children: [
-                      TopShimmerWithoutURL("Movies You Watched Recently"),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
-                        height: 168.0,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: remembermovies.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Map<String, dynamic> jsondetails =
-                                json.decode(remembermovies[index]);
-                            User user = User.fromJson(jsondetails);
-                            //print(user.moviename.toString());
-                            //print(user.url.toString());
-
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPageBody(
-                                      moviename: user.moviename.toString(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 118,
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4.0)),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        //   color: Colors.white,
-                                      ),
-                                      height: 200,
-                                      width: 120,
-                                      child: user.url.toString().isEmpty
-                                          ? ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    "assets/images/loading.png"),
-                                                fit: BoxFit.cover,
-                                              ))
-                                          : ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: Image.network(
-                                                  user.url.toString(),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              : SizedBox(
-                  height: 0.h,
-                ),
-          recommemdedmovies.isNotEmpty
-              ? Container(
-                  child: Column(
-                    children: [
-                      TopShimmerWithoutURL("Recommendations for you"),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
-                        height: 168.0,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: recommemdedmovies.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Map<String, dynamic> jsondetails =
-                                json.decode(recommemdedmovies[index]);
-                            User user = User.fromJson(jsondetails);
-                            //print(user.moviename.toString());
-                            //print(user.url.toString());
-
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPageBody(
-                                      moviename: user.moviename.toString(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 118,
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4.0)),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        //   color: Colors.white,
-                                      ),
-                                      height: 200,
-                                      width: 120,
-                                      child: user.url.toString().isEmpty
-                                          ? ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    "assets/images/loading.png"),
-                                                fit: BoxFit.cover,
-                                              ))
-                                          : ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: Image.network(
-                                                  user.url.toString(),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                    ),
-                                    Positioned(
-                                      bottom: 3,
-                                      right: 0,
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            //add the ontap method after clicking the three dot menu
-                                          },
-                                          child: const Icon(
-                                            Icons.more_vert,
-                                            color: Colors.white,
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              : SizedBox(
-                  height: 0.h,
-                ),
-          searchdata.isNotEmpty
-              ? Container(
-                  child: Column(
-                    children: [
-                      TopShimmerWithoutURL("Movies you have searched"),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
-                        height: 168.0,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: searchdata.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Map<String, dynamic> jsondetails =
-                                json.decode(searchdata[index]);
-                            User user = User.fromJson(jsondetails);
-                            //print(user.moviename.toString());
-                            //print(user.url.toString());
-
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPageBody(
-                                      moviename: user.moviename.toString(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 118,
-                                margin: EdgeInsets.all(6.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4.0)),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        //   color: Colors.white,
-                                      ),
-                                      height: 200,
-                                      width: 120,
-                                      child: user.url.toString().isEmpty
-                                          ? ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    "assets/images/loading.png"),
-                                                fit: BoxFit.cover,
-                                              ))
-                                          : ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: Image.network(
-                                                  user.url.toString(),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                    ),
-                                    Positioned(
-                                      bottom: 3,
-                                      right: 0,
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            //add the ontap method after clicking the three dot menu
-                                          },
-                                          child: const Icon(
-                                            Icons.more_vert,
-                                            color: Colors.white,
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              : SizedBox(
-                  height: 0.h,
-                ),
           SplashScreen.saw == true
               ? persistedGenres.isNotEmpty
                   ? ListView.builder(

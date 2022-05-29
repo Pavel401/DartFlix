@@ -136,26 +136,33 @@ class _RecommendationsState extends State<Recommendations> {
     apibased();
   }
 
-  List<String> movies = [];
+  List<String> movieimages = [];
+  List<String> movietitles = [];
+
   void storedata(String name, String url, String id) async {
-    User user = User(
-      name,
-      url,
-      id,
-    );
-    String userdata = jsonEncode(user);
-    print("userdata is" + userdata.toString());
-    // print(name.toUpperCase());
-    movies.add(userdata.toString());
-    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
-    for (int i = 0; i < recommemdedmovies.length; i++) {
-      if (recommemdedmovies[i] == userdata) {
+    movieimages.add(url.toString());
+    recommemdedmovieimages =
+        preferences.getStringList('recommemdedmovieimages') ?? [];
+    for (int i = 0; i < recommemdedmovieimages.length; i++) {
+      if (recommemdedmovieimages[i] == url) {
         return;
       }
     }
-    recommemdedmovies.add(userdata.toString());
-    recommemdedmovies.toSet().toList();
-    preferences.setStringList("saverecommendation", recommemdedmovies);
+    recommemdedmovieimages.add(url.toString());
+    recommemdedmovieimages.toSet().toList();
+    preferences.setStringList("recommemdedmovieimages", recommemdedmovieimages);
+
+    movietitles.add(name.toString());
+    recommemdedmovienames =
+        preferences.getStringList('recommemdedmovietitles') ?? [];
+    for (int i = 0; i < recommemdedmovienames.length; i++) {
+      if (recommemdedmovienames[i] == name) {
+        return;
+      }
+    }
+    recommemdedmovienames.add(name.toString());
+    recommemdedmovienames.toSet().toList();
+    preferences.setStringList("recommemdedmovietitles", recommemdedmovienames);
   }
 
   @override
@@ -182,16 +189,16 @@ class _RecommendationsState extends State<Recommendations> {
             recommend.isNotEmpty
                 ? InkWell(
                     onTap: () {
-                           var _type = FeedbackType.success;
-                    Vibrate.feedback(_type);
+                      var _type = FeedbackType.success;
+                      Vibrate.feedback(_type);
                       storedata(
                           recommend[0]["original_title"].toString(),
-                          "https://image.tmdb.org/t/p/w500" +
+                          "https://image.tmdb.org/t/p/w780" +
                               recommend[0]["poster_path"].toString(),
                           recommend[0]["id"].toString());
                       storedata(
                           recommend[1]["original_title"].toString(),
-                          "https://image.tmdb.org/t/p/w500" +
+                          "https://image.tmdb.org/t/p/w780" +
                               recommend[1]["poster_path"].toString(),
                           recommend[1]["id"].toString());
 
@@ -277,10 +284,9 @@ class _RecommendationsState extends State<Recommendations> {
                     child: Stack(
                       children: [
                         GestureDetector(
-                          
                             onTap: () {
-                                   var _type = FeedbackType.success;
-                    Vibrate.feedback(_type);
+                              var _type = FeedbackType.success;
+                              Vibrate.feedback(_type);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -306,7 +312,7 @@ class _RecommendationsState extends State<Recommendations> {
                                       borderRadius: BorderRadius.circular(12),
                                       child: FadeInImage.assetNetwork(
                                         image:
-                                            "https://image.tmdb.org/t/p/w500" +
+                                            "https://image.tmdb.org/t/p/w780" +
                                                 popularlist[index]
                                                     ["poster_path"],
                                         placeholder:
@@ -378,7 +384,7 @@ class _RecommendationsState extends State<Recommendations> {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: FadeInImage.assetNetwork(
-                                  image: "https://image.tmdb.org/t/p/w500" +
+                                  image: "https://image.tmdb.org/t/p/w780" +
                                       recommend[index]["poster_path"],
                                   placeholder: "assets/images/loading.png",
                                   fit: BoxFit.cover,

@@ -8,6 +8,8 @@ import 'package:sizer/sizer.dart';
 import '../Util/RoundedRectenguarButton.dart';
 import '../main.dart';
 
+  String stname = "";
+
 class ask extends StatefulWidget {
   const ask({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class ask extends StatefulWidget {
 }
 
 class _askState extends State<ask> {
+
   TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class _askState extends State<ask> {
               padding: const EdgeInsets.all(30.0),
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment. start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     //   identityLogo(),
@@ -84,13 +87,14 @@ class _askState extends State<ask> {
                       onPressed: () async {
                         var _type = FeedbackType.success;
                         Vibrate.feedback(_type);
-
                         if (_controller.text.isEmpty) {
                           _type = FeedbackType.error;
                           Vibrate.feedback(_type);
                           return;
                         } else {
                           // print(_controller.text);
+
+                          stname=_controller.text;
                           preferences.setString(
                               "keyusername", _controller.text.toString());
                           Navigator.pushAndRemoveUntil(

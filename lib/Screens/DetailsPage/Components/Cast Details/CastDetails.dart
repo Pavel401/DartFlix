@@ -82,7 +82,7 @@ class _CastdetailsState extends State<Castdetails> {
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: FadeInImage.assetNetwork(
-                                image: "https://image.tmdb.org/t/p/w500" +
+                                image: "https://image.tmdb.org/t/p/w780" +
                                     widget.profilepath,
                                 fit: BoxFit.cover,
                                 placeholder: "assets/images/loading.png",
@@ -161,7 +161,7 @@ class _CastdetailsState extends State<Castdetails> {
                       child: Image(
                         fit: BoxFit.fitHeight,
                         width: double.infinity,
-                        image: NetworkImage("https://image.tmdb.org/t/p/w500" +
+                        image: NetworkImage("https://image.tmdb.org/t/p/w780" +
                             popularlist[index]['poster_path']),
                       ),
                     ),

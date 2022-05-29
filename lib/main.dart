@@ -16,18 +16,37 @@ late SharedPreferences preferences;
 List persistedGenres = [];
 List persistedLanguages = [];
 List<String> remembermovies = [];
-List<String> remembermoviesurl = [];
-List<String> recommemdedmovies = [];
+List<String> recommemdedmovienames = [];
+List<String> recommemdedmovieimages = [];
+List<String> images = [];
+List<String> title = [];
+
 List<String> searchdata = [];
 String username = "";
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    bool inDebug = false;
+    assert(() {
+      inDebug = true;
+      return true;
+    }());
+    // In debug mode, use the normal error widget which shows
+    // the error message:
+    if (inDebug) return ErrorWidget(details.exception);
+    // In release builds, show a yellow-on-blue message instead:
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        'Error! ${details.exception}',
+        style: TextStyle(color: Colors.yellow),
+        textDirection: TextDirection.ltr,
+      ),
+    );
+  };
   runApp(
-    DevicePreview(
-      builder: (context) => MyApp(), // Wrap your app
-    ),
+    MyApp(), // Wrap your app
   );
 }
 
@@ -51,12 +70,22 @@ class _MyAppState extends State<MyApp> {
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
     remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
-    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
+    recommemdedmovieimages =
+        preferences.getStringList('recommemdedmovieimages') ?? [];
+    recommemdedmovienames =
+        preferences.getStringList('recommemdedmovietitles') ?? [];
+
     searchdata = preferences.getStringList('searchdatas') ?? [];
 
-    recommemdedmovies = recommemdedmovies.reversed.toList();
+    recommemdedmovieimages = recommemdedmovieimages.reversed.toList();
+    recommemdedmovienames = recommemdedmovienames.reversed.toList();
+
     remembermovies = remembermovies.reversed.toList();
     searchdata = searchdata.reversed.toList();
+    images = preferences.getStringList('posters') ?? [];
+    title = preferences.getStringList('movienames') ?? [];
+    images = images.reversed.toList();
+    title = title.reversed.toList();
 
     username = preferences.getString('keyusername') ?? "";
   }
@@ -76,9 +105,7 @@ class _MyAppState extends State<MyApp> {
           '/ask': (context) => ask(),
           '/settings': (context) => Aboutme(),
         },
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+
         theme: ThemeData(
           fontFamily: GoogleFonts.chivo().fontFamily,
         ),

@@ -4,9 +4,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import '../Ask Name/Askname.dart';
+import '../Onboarding Page/Genere selection/Components/GenreChips.dart';
+import '../Onboarding Page/Language Selection/components/LanguageChips.dart';
 import '../Screens/CustomListFromUserHistory/Model/History.dart';
 import '../Screens/DetailsPage/Components/DetailsPageBody.dart';
 import '../Util/RoundedBorderIcon.dart';
@@ -21,87 +25,151 @@ class Profile extends StatefulWidget {
 }
 
 dynamicChips() {
-  if (persistedGenres.isEmpty)
-    return Container(
-      height: 50,
-      child: const Center(child: CircularProgressIndicator()),
-    );
-  return Padding(
-    padding: EdgeInsets.only(top: 2.h, right: 0.10.h, left: 2.h),
-    child: Wrap(
-      spacing: 5.w,
-      runSpacing: 1.h,
-      children: List<Widget>.generate(persistedGenres.length, (int index) {
-        return Chip(
-          label: Text(
-            persistedGenres[index],
-            style: TextStyle(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
+  return persistedGenres.isNotEmpty
+      ? Padding(
+          padding: EdgeInsets.only(top: 2.h, right: 0.10.h, left: 2.h),
+          child: Wrap(
+            spacing: 5.w,
+            runSpacing: 1.h,
+            children:
+                List<Widget>.generate(persistedGenres.length, (int index) {
+              return Chip(
+                label: Text(
+                  persistedGenres[index],
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
+                labelStyle: TextStyle(color: Colors.white),
+                avatar: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Icon(
+                    Icons.movie,
+                    color: Colors.white,
+                  ),
+                ),
+                labelPadding: EdgeInsets.all(4.0),
+                backgroundColor: HexColor("#7220C9"),
+              );
+            }),
           ),
-          labelStyle: TextStyle(color: Colors.white),
-          avatar: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            child: Icon(
-              Icons.movie,
-              color: Colors.white,
-            ),
-          ),
-          labelPadding: EdgeInsets.all(4.0),
-          backgroundColor: HexColor("#7220C9"),
-        );
-      }),
-    ),
-  );
+        )
+      : FilterChipDisplay.filters.isNotEmpty
+          ? Padding(
+              padding: EdgeInsets.only(top: 2.h, right: 0.10.h, left: 2.h),
+              child: Wrap(
+                spacing: 5.w,
+                runSpacing: 1.h,
+                children: List<Widget>.generate(
+                    FilterChipDisplay.filters.length, (int index) {
+                  return Chip(
+                    label: Text(
+                      persistedGenres[index],
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    labelStyle: TextStyle(color: Colors.white),
+                    avatar: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.movie,
+                        color: Colors.white,
+                      ),
+                    ),
+                    labelPadding: EdgeInsets.all(4.0),
+                    backgroundColor: HexColor("#7220C9"),
+                  );
+                }),
+              ),
+            )
+          : Container();
 }
 
 dynamicChips2() {
-  if (persistedLanguages.isEmpty)
-    return Container(
-      height: 50,
-      child: const Center(child: CircularProgressIndicator()),
-    );
-  return Padding(
-    padding: EdgeInsets.only(top: 2.h, right: 0.10.h, left: 2.h),
-    child: Wrap(
-      spacing: 5.w,
-      runSpacing: 1.h,
-      children: List<Widget>.generate(persistedLanguages.length, (int index) {
-        return Chip(
-          label: Text(
-            persistedLanguages[index],
-            style: TextStyle(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
+  return persistedLanguages.isNotEmpty
+      ? Padding(
+          padding: EdgeInsets.only(top: 2.h, right: 0.10.h, left: 2.h),
+          child: Wrap(
+            spacing: 5.w,
+            runSpacing: 1.h,
+            children:
+                List<Widget>.generate(persistedLanguages.length, (int index) {
+              return Chip(
+                label: Text(
+                  persistedLanguages[index],
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
+                labelStyle: TextStyle(color: Colors.white),
+                avatar: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Icon(
+                    Icons.movie,
+                    color: Colors.white,
+                  ),
+                ),
+                labelPadding: EdgeInsets.all(4.0),
+                backgroundColor: HexColor("#7220C9"),
+              );
+            }),
           ),
-          labelStyle: TextStyle(color: Colors.white),
-          avatar: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            child: Icon(
-              Icons.movie,
-              color: Colors.white,
-            ),
-          ),
-          labelPadding: EdgeInsets.all(4.0),
-          backgroundColor: HexColor("#7220C9"),
-        );
-      }),
-    ),
-  );
+        )
+      : LanguageSelection.languages.isNotEmpty
+          ? Padding(
+              padding: EdgeInsets.only(top: 2.h, right: 0.10.h, left: 2.h),
+              child: Wrap(
+                spacing: 5.w,
+                runSpacing: 1.h,
+                children: List<Widget>.generate(
+                    LanguageSelection.languages.length, (int index) {
+                  return Chip(
+                    label: Text(
+                      persistedLanguages[index],
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    labelStyle: TextStyle(color: Colors.white),
+                    avatar: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.movie,
+                        color: Colors.white,
+                      ),
+                    ),
+                    labelPadding: EdgeInsets.all(4.0),
+                    backgroundColor: HexColor("#7220C9"),
+                  );
+                }),
+              ),
+            )
+          : Container();
 }
 
 class _ProfileState extends State<Profile> {
   late Timer timer;
 
-  @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    print("searched movies" + searchdata.toString());
+
     init();
-    Timer.periodic(Duration(seconds: 10), (timer) {
+
+    Timer.periodic(Duration(seconds: 5), (timer) {
+     
       init();
       setState(() {});
     });
     super.initState();
-    print(remembermovies.length);
+    // int count=FilterChipDisplay
   }
 
   @override
@@ -109,18 +177,27 @@ class _ProfileState extends State<Profile> {
     timer.cancel();
     super.dispose();
   }
-
+ 
   static Future init() async {
-    preferences = await SharedPreferences.getInstance();
     persistedGenres = preferences.getStringList('_keygenres') ?? [];
     persistedLanguages = preferences.getStringList('_language') ?? [];
+    preferences = await SharedPreferences.getInstance();
     remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
-    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
-    recommemdedmovies = recommemdedmovies.reversed.toList();
+    recommemdedmovieimages =
+        preferences.getStringList('recommemdedmovieimages') ?? [];
+    recommemdedmovienames =
+        preferences.getStringList('recommemdedmovietitles') ?? [];
+    recommemdedmovieimages = recommemdedmovieimages.reversed.toList();
+    recommemdedmovienames = recommemdedmovienames.reversed.toList();
     remembermovies = remembermovies.reversed.toList();
-
-    username = preferences.getString('keyusername') ?? "";
+    searchdata = preferences.getStringList('searchdatas') ?? [];
+    searchdata = searchdata.reversed.toList();
+    images = preferences.getStringList('posters') ?? [];
+    title = preferences.getStringList('movienames') ?? [];
+     images = images.reversed.toList();
+    title = title.reversed.toList();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +253,9 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        username.isNotEmpty ? username.toString() : "New USer",
+                        username.isNotEmpty
+                            ? username.toString()
+                            : stname.toString(),
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ]),
@@ -196,36 +275,7 @@ class _ProfileState extends State<Profile> {
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                        remembermovies.isNotEmpty
-                            ? Text(
-                                remembermovies.length.toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            : SizedBox(
-                                width: 80.w,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextScroll(
-                                        "Grab a popcorn and watch some movies",
-                                        velocity: Velocity(
-                                            pixelsPerSecond: Offset(20, 0)),
-                                        pauseBetween:
-                                            Duration(milliseconds: 1000),
-                                        mode: TextScrollMode.bouncing,
-                                        style: TextStyle(
-                                            color: HexColor("#DEDEDE"),
-                                            fontSize: 20),
-                                        textAlign: TextAlign.right,
-                                        selectable: false,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                        checkremember(),
                       ],
                     ),
                   ],
@@ -259,36 +309,7 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        recommemdedmovies.isNotEmpty
-                            ? Text(
-                                recommemdedmovies.length.toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            : SizedBox(
-                                width: 80.w,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextScroll(
-                                        "No data till now ",
-                                        velocity: Velocity(
-                                            pixelsPerSecond: Offset(20, 0)),
-                                        pauseBetween:
-                                            Duration(milliseconds: 1000),
-                                        mode: TextScrollMode.bouncing,
-                                        style: TextStyle(
-                                            color: HexColor("#DEDEDE"),
-                                            fontSize: 20),
-                                        textAlign: TextAlign.right,
-                                        selectable: false,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                        checkrecommend(),
                       ],
                     ),
                   ],
@@ -334,7 +355,18 @@ class _ProfileState extends State<Profile> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ]),
-                buildhistory(),
+                images.isNotEmpty
+                    ? buildhistory()
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                            Text(
+                              "No Data till now",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ]),
               ],
             ),
           )),
@@ -342,75 +374,137 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget buildhistory() {
-    return remembermovies.isNotEmpty
-        ? Container(
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
-                  height: 168.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: remembermovies.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      Map<String, dynamic> jsondetails =
-                          json.decode(remembermovies[index]);
-                      User user = User.fromJson(jsondetails);
-                      //print(user.moviename.toString());
-                      //print(user.url.toString());
-
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailsPageBody(
-                                moviename: user.moviename.toString(),
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 118,
-                          margin: EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0)),
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  //   color: Colors.white,
-                                ),
-                                height: 200,
-                                width: 120,
-                                child: user.url.toString().isEmpty
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: const Image(
-                                          image: AssetImage(
-                                              "assets/images/loading.png"),
-                                          fit: BoxFit.cover,
-                                        ))
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
-                                            user.url.toString(),
-                                            fit: BoxFit.cover),
-                                      ),
-                              ),
-                            ],
+    if (images.isEmpty) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 20,
+          itemBuilder: (BuildContext context, int index) {
+            return Shimmer.fromColors(
+              period: const Duration(milliseconds: 2000),
+              baseColor: HexColor("#8970A4"),
+              direction: ShimmerDirection.ltr,
+              highlightColor: HexColor("#463567"),
+              child: Container(
+                width: 118,
+                margin: const EdgeInsets.all(6.0),
+                decoration: BoxDecoration(
+                    color: (Colors.purple[200])!,
+                    borderRadius: BorderRadius.circular(4.0)),
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        height: 168.0,
+        width: MediaQuery.of(context).size.width,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: images.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsPageBody(
+                            moviename: title[index].toString())));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 10.h,
+                  width: 35.w,
+                  child: images.toString().isEmpty
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: const Image(
+                            image: AssetImage("assets/images/loading.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: FadeInImage.assetNetwork(
+                            image: images[index].toString(),
+                            placeholder: "assets/images/loading.png",
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      );
-                    },
-                  ),
-                )
-              ],
-            ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
+
+  bool t = true;
+  Widget checkremember() {
+    return images.isNotEmpty
+        ? Text(
+            images.length.toString(),
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
           )
         : SizedBox(
-            height: 0.h,
+            width: 80.w,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextScroll(
+                    "Grab a popcorn and watch some movies",
+                    velocity: Velocity(pixelsPerSecond: Offset(20, 0)),
+                    pauseBetween: Duration(milliseconds: 1000),
+                    mode: TextScrollMode.bouncing,
+                    style: TextStyle(color: HexColor("#DEDEDE"), fontSize: 20),
+                    textAlign: TextAlign.right,
+                    selectable: false,
+                  ),
+                ),
+              ],
+            ),
           );
   }
+
+  Widget checkrecommend() {
+    return recommemdedmovienames.isNotEmpty
+        ? Text(
+            recommemdedmovienames.length.toString(),
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
+          )
+        : SizedBox(
+            width: 80.w,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextScroll(
+                    "No data till now ",
+                    velocity: Velocity(pixelsPerSecond: Offset(20, 0)),
+                    pauseBetween: Duration(milliseconds: 1000),
+                    mode: TextScrollMode.bouncing,
+                    style: TextStyle(color: HexColor("#DEDEDE"), fontSize: 20),
+                    textAlign: TextAlign.right,
+                    selectable: false,
+                  ),
+                ),
+              ],
+            ),
+          );
+  }
+
+  List<String> dk = [
+    "https://res.cloudinary.com/dc0tfxkph/image/upload/v1653673099/heroku.png",
+    "https://res.cloudinary.com/dc0tfxkph/image/upload/v1653673099/heroku.png",
+    "https://res.cloudinary.com/dc0tfxkph/image/upload/v1653673099/heroku.png",
+    "https://res.cloudinary.com/dc0tfxkph/image/upload/v1653673099/heroku.png",
+    "https://res.cloudinary.com/dc0tfxkph/image/upload/v1653673099/heroku.png",
+  ];
 }

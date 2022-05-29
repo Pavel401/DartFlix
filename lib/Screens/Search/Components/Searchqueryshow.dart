@@ -143,7 +143,7 @@ class _SearchQueryState extends State<SearchQuery> {
 
     storedata(
         search_result[0]["original_title"].toString(),
-        "https://image.tmdb.org/t/p/w500" +
+        "https://image.tmdb.org/t/p/w780" +
             search_result[0]["poster_path"].toString(),
         search_result[0]["original_title"].toString());
 
@@ -239,7 +239,7 @@ class _SearchQueryState extends State<SearchQuery> {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(4),
                                 child: FadeInImage.assetNetwork(
-                                  image: "https://image.tmdb.org/t/p/w500" +
+                                  image: "https://image.tmdb.org/t/p/w780" +
                                       search_result[index]["poster_path"],
                                   placeholder: "assets/images/loading.png",
                                   fit: BoxFit.cover,

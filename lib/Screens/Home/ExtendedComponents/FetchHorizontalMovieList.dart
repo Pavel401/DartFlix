@@ -217,26 +217,31 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
   }
 
   List<String> movies = [];
-  void storedata(String name, String url, String id) async {
-    User user = User(
-      name,
-      url,
-      id,
-    );
-    String userdata = jsonEncode(user);
-    print("userdata is" + userdata.toString());
+  List<String> timages = [];
+  List<String> ttitles = [];
 
-    movies.add(userdata.toString());
-    // print(movies.toString());
-    remembermovies = preferences.getStringList('savedmoviehistory') ?? [];
-    for (int i = 0; i < remembermovies.length; i++) {
-      if (remembermovies[i] == userdata) {
+  void storedata(String name, String url, String id) async {
+    timages.add(url.toString());
+    images = preferences.getStringList('posters') ?? [];
+    for (int i = 0; i < images.length; i++) {
+      if (images[i] == url) {
         return;
       }
     }
-    remembermovies.add(userdata.toString());
-    remembermovies.toSet().toList();
-    preferences.setStringList("savedmoviehistory", remembermovies);
+    images.add(url.toString());
+    images.toSet().toList();
+    preferences.setStringList("posters", images);
+
+    ttitles.add(name.toString());
+    title = preferences.getStringList('movienames') ?? [];
+    for (int i = 0; i < title.length; i++) {
+      if (title[i] == name) {
+        return;
+      }
+    }
+    title.add(name.toString());
+    title.toSet().toList();
+    preferences.setStringList("movienames", title);
   }
 
   @override
@@ -275,7 +280,7 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                     onTap: () {
                       storedata(
                           val[index]["original_title"].toString(),
-                          "https://image.tmdb.org/t/p/w500" +
+                          "https://image.tmdb.org/t/p/w780" +
                               val[index]["poster_path"].toString(),
                           val[index]["id"].toString());
                       Navigator.push(
@@ -313,7 +318,7 @@ class _FetchHorizontalMovieListState extends State<FetchHorizontalMovieList> {
                                         borderRadius: BorderRadius.circular(12),
                                         child: FadeInImage.assetNetwork(
                                           image:
-                                              "https://image.tmdb.org/t/p/w500" +
+                                              "https://image.tmdb.org/t/p/w780" +
                                                   val[index]["poster_path"],
                                           placeholder:
                                               "assets/images/loading.png",

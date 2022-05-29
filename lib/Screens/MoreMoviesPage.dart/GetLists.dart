@@ -116,7 +116,7 @@ class _MoreMoviesState extends State<MoreMovies> {
                           : popularlist[index]["release_date"].toString(),
                   url: popularlist[index]["poster_path"].toString() == "null"
                       ? "NULL"
-                      : "https://image.tmdb.org/t/p/w500" +
+                      : "https://image.tmdb.org/t/p/w780" +
                           popularlist[index]["poster_path"].toString(),
                   type: check(),
                 );

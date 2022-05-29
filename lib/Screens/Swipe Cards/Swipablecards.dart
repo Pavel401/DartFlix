@@ -67,27 +67,36 @@ class _SwipableCardsState extends State<SwipableCards> {
       ratings.add(val[i]["vote_average"].toString());
     }
   }
-List<String> movies = [];
+
+  List<String> movieimages = [];
+  List<String> movietitles = [];
+
   void storedata(String name, String url, String id) async {
-    User user = User(
-      name,
-      url,
-      id,
-    );
-    String userdata = jsonEncode(user);
-    print("userdata is" + userdata.toString());
-    // print(name.toUpperCase());
-    movies.add(userdata.toString());
-    recommemdedmovies = preferences.getStringList('saverecommendation') ?? [];
-    for (int i = 0; i < recommemdedmovies.length; i++) {
-      if (recommemdedmovies[i] == userdata) {
+    movieimages.add(url.toString());
+    recommemdedmovieimages =
+        preferences.getStringList('recommemdedmovieimages') ?? [];
+    for (int i = 0; i < recommemdedmovieimages.length; i++) {
+      if (recommemdedmovieimages[i] == url) {
         return;
       }
     }
-    recommemdedmovies.add(userdata.toString());
-    recommemdedmovies.toSet().toList();
-    preferences.setStringList("saverecommendation", recommemdedmovies);
+    recommemdedmovieimages.add(url.toString());
+    recommemdedmovieimages.toSet().toList();
+    preferences.setStringList("recommemdedmovieimages", recommemdedmovieimages);
+
+    movietitles.add(name.toString());
+    recommemdedmovienames =
+        preferences.getStringList('recommemdedmovietitles') ?? [];
+    for (int i = 0; i < recommemdedmovienames.length; i++) {
+      if (recommemdedmovienames[i] == name) {
+        return;
+      }
+    }
+    recommemdedmovienames.add(name.toString());
+    recommemdedmovienames.toSet().toList();
+    preferences.setStringList("recommemdedmovietitles", recommemdedmovienames);
   }
+
   void create_cards() {
     for (int i = 0; i < names.length; i++) {
       _swipeItems.add(
@@ -98,11 +107,10 @@ List<String> movies = [];
               year: releaseyear[i],
               url: images[i]),
           likeAction: () {
-             storedata(
-                          names[i].toString(),
-                          "https://image.tmdb.org/t/p/original" +
-                                                  images[i].toString(),
-                          ratings[i].toString());
+            storedata(
+                names[i].toString(),
+                "https://image.tmdb.org/t/p/original" + images[i].toString(),
+                ratings[i].toString());
             actions(context, names[i], 'Liked');
           },
           nopeAction: () {
@@ -117,7 +125,7 @@ List<String> movies = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: HexColor("#121212"),
         appBar: AppBar(
           backgroundColor: HexColor("#272727"),
@@ -332,17 +340,16 @@ List<String> movies = [];
                             children: [
                               InkWell(
                                   onTap: () {
-
                                     _matchEngine!.currentItem!.nope();
-                                         var _type = FeedbackType.warning;
-                    Vibrate.feedback(_type);
+                                    var _type = FeedbackType.warning;
+                                    Vibrate.feedback(_type);
                                   },
                                   child: buttonWidget(
                                       Icons.close, HexColor("#7220C9"))),
                               InkWell(
                                 onTap: () {
-                                       var _type = FeedbackType.success;
-                    Vibrate.feedback(_type);
+                                  var _type = FeedbackType.success;
+                                  Vibrate.feedback(_type);
                                   _matchEngine!.currentItem!.like();
                                 },
                                 child: buttonWidget(
@@ -359,4 +366,3 @@ List<String> movies = [];
               ));
   }
 }
-

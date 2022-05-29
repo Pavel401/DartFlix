@@ -72,12 +72,6 @@ class _HomeCarousleState extends State<HomeCarousle> {
         MovieCard(
           digit: 4,
         ),
-        MovieCard(
-          digit: 5,
-        ),
-        MovieCard(
-          digit: 7,
-        ),
       ],
       options: CarouselOptions(
         height: 250,

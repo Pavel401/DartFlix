@@ -125,7 +125,7 @@ class _CastState extends State<Cast> {
             radius: 32,
             backgroundImage: NetworkImage(cast[index]["profile_path"] == null
                 ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR28i5jWF37DvM01csPLTUTxEvCUAiL1ho6qw&usqp=CAU"
-                : "https://image.tmdb.org/t/p/w500" +
+                : "https://image.tmdb.org/t/p/w780" +
                     cast[index]["profile_path"]),
           ),
           title: Text(
