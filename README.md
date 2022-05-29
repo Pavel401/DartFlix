@@ -138,7 +138,9 @@ Movie Overview Page            |   Cast List Page
 ## Machine learning model used:
 
 I have incorporated machine learning models like a bag of words, tf - idf vectorization, similarity analysis, and review analysis based on multinomial naïve bays algorithm. Which is a Bayesian learning approach popular in Natural Language Processing (NLP).
-  
+  ## Architecture :
+
+![Blank diagram (1)](https://user-images.githubusercontent.com/47685150/170880263-1500966b-b94b-4043-a4c8-82ed1411cf93.png)
 
 
  ## Similarity Score : 
