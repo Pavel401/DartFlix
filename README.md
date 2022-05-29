@@ -66,7 +66,7 @@ Install DartFlix apk
 ```bash
  I have already compiled the apk and attached the download link.
 ```
-![Download APK  - from Here](https://img.shields.io/badge/Download_APK_-from_Here-7220C9)
+[![Download Apk - Click Here](https://img.shields.io/badge/Download_Apk-Click_Here-2ea44f)](https://drive.google.com/uc?id=1_-jhXwut3gYcALAgsyl4f6Wkj-QMV_gE&export=download)
 
 ## Run Locally
 Flutter SDK
@@ -167,4 +167,33 @@ Movie Overview Page            |   Cast List Page
 
 
 
+
+
+## API Reference
+
+#### Get MOVIE DETAILS
+
+```http
+  GET /getmovie/moviename
+  (ex - https://enage22.herokuapp.com/getmovie/Avatar)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `moviename` | `string` | **Required**. Movie name (ex-Avatar) |
+
+#### Get Recommendations
+
+```http
+  GET /send/moviename
+  (ex- https://enage22.herokuapp.com/send/Avatar)
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `moviename`      | `string` | **Required**. Moviename (ex-Avatar)|
+
+#### add(num1, num2)
+
+Takes two numbers and returns the sum.
 
