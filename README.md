@@ -9,7 +9,7 @@
   <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653675342/Untitled_800_250px.png" alt="demo"/>
 </p>
 
-# `DartFlix` - The Movie Recommender built using Flutter & Dart
+# `DartFlix` - The Movie Recommender built using Flutter & Flask
 
 [![Custom Flask API](https://img.shields.io/badge/Flask-API-2ea44f)](https://enage22.herokuapp.com/)
 [![Flutter - Framework](https://img.shields.io/badge/Flutter-Framework-7220C9)](https://flutter.dev/)
@@ -25,7 +25,7 @@
 
 - Content Based Recommender System recommends movies similar to the movie user likes and analyses the sentiments on the reviews given by the user for that movie.
 
-- The details of the movies(title, genre, runtime, rating, poster, etc) are fetched using an API created in this project using Flask and Machine learning, https://enage22.herokuapp.com/getmovie/<MovieName> and https://www.themoviedb.org/documentation/api, and using the IMDB id of the movie in the API, I did web scraping to get the reviews given by the user in the IMDB site using `beautifulsoup4` and performed sentiment analysis on those reviews.
+- The details of the movies(title, genre, runtime, rating, poster, etc) are fetched using an API created in this project using Flask and Machine learning, https://enage22.herokuapp.com/ and https://www.themoviedb.org/documentation/api, and using the IMDB id of the movie in the API, I did web scraping to get the reviews given by the user in the IMDB site using `beautifulsoup4` and performed sentiment analysis on those reviews.It uses recommendations fetched from api made by me https://enage22.herokuapp.com/.
 
 
 - There is a Movie search feature which will show all the recommended movies from the movies name.
@@ -37,12 +37,17 @@
 - There is a Movie review tab which shows all reviews and  performed sentiment analysis on those reviews.
   
   
- 
+## Documents:
+  
 > Take a look at the presentation [Here](https://drive.google.com/file/d/11au8ETgKUJ8KxVM09LsH4VLWeWHHJx0K/view?usp=sharing
 )<br>
  > My [Software write up during the Microsoft Engage Program](https://drive.google.com/file/d/11au8ETgKUJ8KxVM09LsH4VLWeWHHJx0K/view?usp=sharing)
 
- 
+ ## Demo Video:
+
+ <a href="https://www.youtube.com/watch?v=deZILabHNzo"> <img src="https://user-images.githubusercontent.com/47685150/171005442-729b86ac-86b0-4826-91f4-cb468a88a9d7.png" alt="Demo Video" height='500' width='900'/> </a>
+  
+   Url: https://www.youtube.com/watch?v=deZILabHNzo
  ## Features :
    
  - When the user opens the app for the first time ,it shows a Introduction screen which gives a basic idea about the app.
@@ -53,7 +58,7 @@
  
  -  In the homescreen `DartFlix` shows all the recommended  movies based on users previous watching history.
 
-- it provides search movie feature which fetche movies from the database and displays inside the app.
+- It provides search movie feature which fetche movies from the database and displays inside the app.
 -  It will provide the movie title, movie poster, overviews, rating, genre, release date, runtime, status.
 - It also provides top cast name and their other movies.
 - `DartFlix` also provides user reviews in terms of comments and sentiments that is very important for deciding any particular searched movie is good or bad.
@@ -131,8 +136,9 @@ Movie Overview Page            |   Cast List Page
 :-------------------------:|:-------------------------:
 ![tia5300446429116516377](https://user-images.githubusercontent.com/47685150/170874824-2e2dcd52-f0f6-4cde-91bf-a8871d28d19d.png)|![tia76456325585923122](https://user-images.githubusercontent.com/47685150/170874835-f1f1bc37-8576-437c-b99b-fd1a34afd7d4.png)
 
+![Untitled (960 × 540px) (1)](https://user-images.githubusercontent.com/47685150/171011489-5bf7ab9c-183e-4140-86e2-45a9574c4e53.png)
 
-
+![Untitled (960 × 540px) (2)](https://user-images.githubusercontent.com/47685150/171011575-b442c5cc-0047-467d-bc7c-be31b639238f.png)
 
 
 ## Machine learning model used:
@@ -172,6 +178,7 @@ download these two datasets and put it in the recommendation api folder.
 
 
 ## API Reference
+ Deployed  Api : https://enage22.herokuapp.com/
   
   API project can be found here https://github.com/Pavel401/Enage-Recommendation-API
 
