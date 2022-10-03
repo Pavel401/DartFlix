@@ -6,7 +6,7 @@
 
 <br/>
 <p align="center">
-  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1653674755/Untitled_design_1.png" alt="demo"/>
+  <img width="700" align="center" src="https://res.cloudinary.com/dc0tfxkph/image/upload/v1664825796/Untitled_800_250px_2.png" alt="demo"/>
 </p>
 
 # `DartFlix` - The Movie Recommender built using Flutter & Flask
